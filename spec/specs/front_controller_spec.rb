@@ -1,4 +1,4 @@
-require '../spec_helper'
+require 'spec_helper'
 
 describe FrontController do
   let(:command_registry) { fake }
@@ -8,6 +8,7 @@ describe FrontController do
     let(:correct_command) { fake }
     let(:incorrect_command) { fake }
     let(:response) { [] }
+    let(:env) { {} }
     before(:each) do
       command_registry.stub(:command_for).with(env).and_return(correct_command)
       correct_command.stub(:run_against).and_return(response)
