@@ -4,13 +4,22 @@ class Container
     register(:container) { self }
   end
   def register(key, &block)
-    @items[key] = [] unless @items[key]
-    @items[key].push(block)
+    items_for(key).push(block)
   end
   def resolve(key)
-    @items[key].first.call(self)
+    instantiate(items_for(key).first)
   end
   def resolve_all(key)
-    @items[key].map {|item| item.call(self) }
+    items_for(key).map {|item| instantiate(item) }
+  end
+
+  private
+
+  def items_for(key)
+    @items[key] = [] unless @items[key]
+    @items[key]
+  end
+  def instantiate(factory_method)
+    factory_method.call(self)
   end
 end
