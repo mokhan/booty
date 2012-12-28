@@ -24,13 +24,25 @@ describe Container do
   end
   describe "when multiple items are registered with the same key" do
     context "when resolving a single item" do
-      pending "should return the first one registered" do
-        
+      let(:jeans) { fake }
+      before :each do
+        sut.register(:pants) { jeans }
+        @result = sut.resolve(:pants)
+      end
+      it "should return the first one registered" do
+        @result.should == jeans
       end
     end
     context "when resolving all items" do
-      pending "should return them all" do
-        
+      let(:jeans) { fake }
+      let(:dress_pants) { fake }
+      before :each do
+        sut.register(:pants) { jeans }
+        sut.register(:pants) { dress_pants }
+        @results = sut.resolve_all(:pants)
+      end
+      it "should return them all" do
+        @results.should == [jeans, dress_pants]
       end
     end
   end
