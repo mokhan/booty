@@ -22,4 +22,16 @@ describe Container do
       sut.resolve(:container).should == sut
     end
   end
+  describe "when multiple items are registered with the same key" do
+    context "when resolving a single item" do
+      pending "should return the first one registered" do
+        
+      end
+    end
+    context "when resolving all items" do
+      pending "should return them all" do
+        
+      end
+    end
+  end
 end
