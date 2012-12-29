@@ -1,7 +1,5 @@
-require 'command_registry'
-
 class FrontController
-  def initialize(command_registry=CommandRegistry.new)
+  def initialize(command_registry)
     @command_registry = command_registry
   end
   def call(env)
