@@ -1,7 +1,14 @@
 require 'default_command'
 
 class CommandRegistry
+  def initialize(container)
+    @container = container
+  end
   def command_for(request)
-    DefaultCommand.new
+    http_commands.find { |command| command.matches(request) } || DefaultCommand.new
+  end
+  private
+  def http_commands
+    @container.resolve_all(:http_command)
   end
 end
