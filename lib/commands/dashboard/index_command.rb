@@ -5,10 +5,9 @@ module Booty
 
       end
       def matches(request)
-        true
+        request["REQUEST_PATH"] == "/"
       end
       def run_against(request)
-
       end
     end
   end
