@@ -1,6 +1,10 @@
+require 'http_command_behaviour'
+
 module Booty
   module Dashboard
     class IndexCommand 
+      include HttpCommandBehaviour
+
       def initialize(view_engine)
         @view_engine = view_engine
       end
@@ -8,13 +12,7 @@ module Booty
         request["REQUEST_PATH"] == "/"
       end
       def run_against(request)
-        respond_with(:content => @view_engine.render(:template => "/dashboard/index.html.erb"))
-      end
-      private 
-      def respond_with(options)
-        defaults = { :status => 200, :content_type => "text/html" }
-        options = options.merge(defaults)
-        [options[:status], {"Content-Type" => options[:content_type]}, [options[:content]]]
+        html_response(@view_engine.render(:template => "/dashboard/index.html.erb"))
       end
     end
   end
