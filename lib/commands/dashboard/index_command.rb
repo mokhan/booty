@@ -8,7 +8,13 @@ module Booty
         request["REQUEST_PATH"] == "/"
       end
       def run_against(request)
-        [200, {"Content-Type" => "text/html"}, [@view_engine.render("/dashboard/index.html.erb")]]
+        respond_with(:content => @view_engine.render(:template => "/dashboard/index.html.erb"))
+      end
+      private 
+      def respond_with(options)
+        defaults = { :status => 200, :content_type => "text/html" }
+        options = options.merge(defaults)
+        [options[:status], {"Content-Type" => options[:content_type]}, [options[:content]]]
       end
     end
   end

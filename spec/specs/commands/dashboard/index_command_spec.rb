@@ -20,7 +20,7 @@ module Booty
       context "when rendering the home page" do
         let(:html) { "<html></html>" }
         before :each do
-          view_engine.stub(:render).with("/dashboard/index.html.erb").and_return(html)
+          view_engine.stub(:render).with(:template => "/dashboard/index.html.erb").and_return(html)
         end
         before :each do
           @result = sut.run_against(nil)
