@@ -7,14 +7,16 @@ module Booty
       @defaults = defaults
     end
     def render(options = {})
-      filename = File.join(@defaults[:root_path], options[:template])
-      ERB.new(File.read(filename)).result(model_from(options).get_binder).chomp
+      ERB.new(read_from_file(options[:template])).result(model_from(options).get_binder).chomp
     end
     private 
     def model_from(options)
       model = options[:model]
       model.extend(ExposeBindingBehaviour)
       model
+    end
+    def read_from_file(template)
+      File.read(File.join(@defaults[:root_path], template))
     end
   end
 end
