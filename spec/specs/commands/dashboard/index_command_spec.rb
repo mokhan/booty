@@ -1,3 +1,5 @@
+require 'spec_helper'
+
 module Booty
   module Dashboard
     describe IndexCommand do
