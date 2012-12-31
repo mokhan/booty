@@ -4,7 +4,7 @@ require 'expose_binding_behaviour'
 
 module Booty
   class DefaultCommand
-    def initialize(view_engine = IOC.resolve(:view_engine))
+    def initialize(view_engine)
       @view_engine = view_engine
     end
     def matches(request)

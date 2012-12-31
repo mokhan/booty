@@ -1,10 +1,10 @@
-require 'default_command'
+require 'routed_command'
+require 'block_specification'
 
 module Booty
   class CommandRegistry
-    def initialize
-      @commands = []
-      register_route(DefaultCommand.new) { |request| true }
+    def initialize(commands = [])
+      @commands = commands
     end
 
     def register_route(command, &block)
@@ -13,18 +13,6 @@ module Booty
 
     def command_for(route)
       @commands.find { |command| command.matches(route) }.command
-    end
-  end
-
-  class RoutedCommand
-    attr_reader :command
-
-    def initialize(specification, command)
-      @specification = specification
-      @command = command
-    end
-    def matches(item)
-      @specification.matches(item)
     end
   end
 end

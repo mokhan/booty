@@ -24,19 +24,7 @@ module Booty
         @result.should_not == other_command
       end
     end
-    context "when a command cannot be found to process a request" do
-      let(:other_command) { fake }
-      let(:request) { {} }
-      before :each do
-        other_command.stub(:matches).with(request).and_return(false)
-      end
-      before :each do
-        @result = sut.command_for(request)
-      end
-      it "should return the DefaultCommand" do
-        @result.should be_a_kind_of(DefaultCommand)
-      end
-    end
+
     context "when registering a route" do
       let(:command) { fake }
       let(:other_command) { fake }
@@ -56,5 +44,6 @@ module Booty
         sut.command_for("MOO").should == other_command
       end
     end
+
   end
 end
