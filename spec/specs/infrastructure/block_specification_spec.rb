@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 module Booty
-  describe BlockMatch do
-    let(:sut) { BlockMatch.new { |item| item == true } }
+  describe BlockSpecification do
+    let(:sut) { BlockSpecification.new { |item| item == true } }
     context "when an item matches" do
       it "should return true" do
         sut.matches(true).should be_true
@@ -16,7 +16,7 @@ module Booty
     describe "or" do
       context "when one item matches" do
         it "should return true" do
-          sut.or(BlockMatch.new {|x| x == false} ).matches(false).should be_true
+          sut.or(BlockSpecification.new {|x| x == false} ).matches(false).should be_true
         end
         it "should return true" do
           sut.or {|x| x == false} .matches(false).should be_true
@@ -24,7 +24,7 @@ module Booty
       end
       context "when the other item matches" do
         it "should return true" do
-          sut.or(BlockMatch.new {|x| x == false} ).matches(true).should be_true
+          sut.or(BlockSpecification.new {|x| x == false} ).matches(true).should be_true
         end
         it "should return true" do
           sut.or {|x| x == false} .matches(true).should be_true
@@ -32,7 +32,7 @@ module Booty
       end
       context "when neither item matches" do
         it "should return false" do
-          sut.or(BlockMatch.new {|x| x == true}).matches(false).should be_false
+          sut.or(BlockSpecification.new {|x| x == true}).matches(false).should be_false
         end
         it "should return false" do
           sut.or {|x| x == true}.matches(false).should be_false
@@ -42,7 +42,7 @@ module Booty
     describe "and" do
       context "when one item matches" do
         it "should return false" do
-          sut.and(BlockMatch.new {|x| x == false} ).matches(false).should be_false
+          sut.and(BlockSpecification.new {|x| x == false} ).matches(false).should be_false
         end
         it "should return false" do
           sut.and {|x| x == false} .matches(false).should be_false
@@ -50,7 +50,7 @@ module Booty
       end
       context "when the other item matches" do
         it "should return false" do
-          sut.and(BlockMatch.new {|x| x == false} ).matches(true).should be_false
+          sut.and(BlockSpecification.new {|x| x == false} ).matches(true).should be_false
         end
         it "should return false" do
           sut.and {|x| x == false} .matches(true).should be_false
@@ -58,7 +58,7 @@ module Booty
       end
       context "when neither item matches" do
         it "should return false" do
-          sut.and(BlockMatch.new {|x| x == true}).matches(false).should be_false
+          sut.and(BlockSpecification.new {|x| x == true}).matches(false).should be_false
         end
         it "should return false" do
           sut.and {|x| x == true}.matches(false).should be_false
@@ -66,7 +66,7 @@ module Booty
       end
       context "when both items match" do
         it "should return true" do
-          sut.and(BlockMatch.new {|x| x == true}).matches(true).should be_true
+          sut.and(BlockSpecification.new {|x| x == true}).matches(true).should be_true
         end
         it "should return true" do
           sut.and {|x| x == true}.matches(true).should be_true

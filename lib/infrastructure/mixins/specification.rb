@@ -1,4 +1,4 @@
-require "block_match"
+require "block_specification"
 
 module Booty
   module Specification
@@ -19,7 +19,7 @@ module Booty
     private
 
     def create_predicate(predicate = nil, &block)
-      block_given? ? BlockMatch.new(&block) : predicate
+      block_given? ? BlockSpecification.new(&block) : predicate
     end
   end
 end

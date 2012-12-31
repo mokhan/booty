@@ -1,7 +1,7 @@
 require 'specification'
 
 module Booty
-  class BlockMatch
+  class BlockSpecification
     include Specification
 
     def initialize(&block)
