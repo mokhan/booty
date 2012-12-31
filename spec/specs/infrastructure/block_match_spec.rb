@@ -12,4 +12,21 @@ describe BlockMatch do
       sut.matches(false).should be_false
     end
   end
+  describe "or" do
+    context "when one item matches" do
+      it "should return true" do
+        sut.or(BlockMatch.new {|x| x == false} ).matches(false).should be_true
+      end
+    end
+    context "when the other item matches" do
+      it "should return true" do
+        sut.or(BlockMatch.new {|x| x == false} ).matches(true).should be_true
+      end
+    end
+    context "when neither item matches" do
+      it "should return false" do
+        sut.or(BlockMatch.new {|x| x == true}).matches(false).should be_false
+      end
+    end
+  end
 end
