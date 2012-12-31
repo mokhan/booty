@@ -8,7 +8,7 @@ module Booty
     end
 
     def register_route(command, &block)
-      @commands.unshift(RoutedCommand.new(BlockSpecification.new(&block), command))
+      @commands.push(RoutedCommand.new(BlockSpecification.new(&block), command))
     end
 
     def command_for(route)

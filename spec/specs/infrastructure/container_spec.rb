@@ -52,5 +52,22 @@ module Booty
         end
       end
     end
+    context "when a component is registered as a singleton" do
+      before :each do
+        sut.register(:singleton) { fake }.as_singleton
+      end
+      it "should return the same instance of that component each time it is resolved" do
+        sut.resolve(:singleton).should == sut.resolve(:singleton)
+      end
+    end
+    context "when invoking the factory method" do
+      before :each do
+        sut.register(:item){ |item| @result = item[0] }
+        sut.resolve(:item)
+      end
+      it "should pass the container through to the block" do
+        @result.should == sut
+      end
+    end
   end
 end
