@@ -4,10 +4,14 @@ require 'expose_binding_behaviour'
 
 module Booty
   class DefaultCommand
+    def initialize(view_engine = IOC.resolve(:view_engine))
+      @view_engine = view_engine
+    end
+    #def matches(request)
+      #true
+    #end
     def run_against(request)
-      payload = OpenStruct.new(:name => "BINDING", :time => Time.now)
-      payload.extend(ExposeBindingBehaviour)
-      [404, {"Content-Type" => "text/html"}, [ERB.new(File.read('lib/views/404.html.erb')).result(payload.get_binder)]]
+      [404, {"Content-Type" => "text/html"}, [@view_engine.render(:template => "/404.html.erb", :model => OpenStruct.new(:name => "BINDING", :time => Time.now))]]
     end
   end
 end

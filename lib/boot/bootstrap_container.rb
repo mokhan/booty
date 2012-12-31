@@ -13,10 +13,13 @@ container.register(:front_controller) do
   Booty::FrontController.new(container.resolve(:command_registry))
 end
 container.register(:view_engine) do
-  Booty::ViewEngine.new(:root_path => 'lib/views')
+  Booty::ViewEngine.new(:root_path => 'lib/commands')
 end
 container.register(:http_command) do
   Booty::Dashboard::IndexCommand.new(container.resolve(:view_engine))
+end
+container.register(:http_command) do
+  Booty::DefaultCommand.new(container.resolve(:view_engine))
 end
 
 Booty::IOC.bind_to(container)
