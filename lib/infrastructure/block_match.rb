@@ -1,14 +1,13 @@
-class BlockMatch
-  def initialize(&block)
-    @block = block
-  end
-  def matches(item)
-    @block.call(item)
-  end
+require 'boolean_matching_behaviour'
 
-  def or(other_specification)
-    BlockMatch.new do |item|
-      self.matches(item) || other_specification.matches(item)
+module Booty
+  class BlockMatch
+    include BooleanMatchingBehaviour
+    def initialize(&block)
+      @block = block
+    end
+    def matches(item)
+      @block.call(item)
     end
   end
 end
