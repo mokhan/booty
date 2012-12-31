@@ -39,5 +39,39 @@ module Booty
         end
       end
     end
+    describe "and" do
+      context "when one item matches" do
+        it "should return false" do
+          sut.and(BlockMatch.new {|x| x == false} ).matches(false).should be_false
+        end
+        it "should return false" do
+          sut.and {|x| x == false} .matches(false).should be_false
+        end
+      end
+      context "when the other item matches" do
+        it "should return false" do
+          sut.and(BlockMatch.new {|x| x == false} ).matches(true).should be_false
+        end
+        it "should return false" do
+          sut.and {|x| x == false} .matches(true).should be_false
+        end
+      end
+      context "when neither item matches" do
+        it "should return false" do
+          sut.and(BlockMatch.new {|x| x == true}).matches(false).should be_false
+        end
+        it "should return false" do
+          sut.and {|x| x == true}.matches(false).should be_false
+        end
+      end
+      context "when both items match" do
+        it "should return true" do
+          sut.and(BlockMatch.new {|x| x == true}).matches(true).should be_true
+        end
+        it "should return true" do
+          sut.and {|x| x == true}.matches(true).should be_true
+        end
+      end
+    end
   end
 end
