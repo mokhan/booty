@@ -1,33 +1,24 @@
 require 'default_command'
-#require 'specification'
 
 module Booty
   class CommandRegistry
-    def initialize(container)
-      @container = container
+    def initialize
       @commands = []
-    end
-
-    def command_for(request)
-      http_commands.find { |command| command.matches(request) } || DefaultCommand.new
+      register_route(DefaultCommand.new) { |request| true }
     end
 
     def register_route(command, &block)
-      @commands.push(RoutedCommand.new(BlockSpecification.new(&block), command))
+      @commands.unshift(RoutedCommand.new(BlockSpecification.new(&block), command))
     end
 
-    def routed_command_for(route)
+    def command_for(route)
       @commands.find { |command| command.matches(route) }.command
-    end
-
-    private
-    def http_commands
-      @container.resolve_all(:http_command)
     end
   end
 
   class RoutedCommand
     attr_reader :command
+
     def initialize(specification, command)
       @specification = specification
       @command = command
