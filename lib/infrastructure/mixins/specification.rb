@@ -1,7 +1,7 @@
 require "block_match"
 
 module Booty
-  module BooleanMatchingBehaviour
+  module Specification
     def or(other_specification=nil, &block)
       if block_given?
         other_specification = BlockMatch.new(&block)

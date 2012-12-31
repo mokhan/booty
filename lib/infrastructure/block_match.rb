@@ -1,11 +1,13 @@
-require 'boolean_matching_behaviour'
+require 'specification'
 
 module Booty
   class BlockMatch
-    include BooleanMatchingBehaviour
+    include Specification
+
     def initialize(&block)
       @block = block
     end
+
     def matches(item)
       @block.call(item)
     end
