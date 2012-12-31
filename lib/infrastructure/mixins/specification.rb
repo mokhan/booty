@@ -12,6 +12,10 @@ module Booty
       create_predicate { |item| self.matches(item) && matcher.matches(item) }
     end
 
+    def not
+      create_predicate { |item| !self.matches(item) }
+    end
+
     private
 
     def create_predicate(predicate = nil, &block)

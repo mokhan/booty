@@ -73,5 +73,17 @@ module Booty
         end
       end
     end
+    describe "not" do
+      context "when an item matches" do
+        it "should return false" do
+          sut.not.matches(true).should be_false
+        end
+      end
+      context "when an item does not match" do
+        it "should return true" do
+          sut.not.matches(false).should be_true
+        end
+      end
+    end
   end
 end
