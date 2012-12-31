@@ -38,5 +38,24 @@ module Booty
         @result.should be_a_kind_of(DefaultCommand)
       end
     end
+    context "when registering a route" do
+      let(:command) { fake }
+      let(:other_command) { fake }
+
+      before :each do
+        sut.register_route(command) do |request|
+          request == "BLAH"
+        end
+        sut.register_route(other_command) do |request|
+          request == "MOO"
+        end
+      end
+      it "should return the command that matches the first route" do
+        sut.routed_command_for("BLAH").should == command
+      end
+      it "should return a command that matches the second route" do
+        sut.routed_command_for("MOO").should == other_command
+      end
+    end
   end
 end
