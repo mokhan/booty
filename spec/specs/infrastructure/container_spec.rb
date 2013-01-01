@@ -62,7 +62,7 @@ module Booty
     end
     context "when invoking the factory method" do
       before :each do
-        sut.register(:item){ |item| @result = item[0] }
+        sut.register(:item){ |item| @result = item }
         sut.resolve(:item)
       end
       it "should pass the container through to the block" do
