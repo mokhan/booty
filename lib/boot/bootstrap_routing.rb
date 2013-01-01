@@ -1,5 +1,6 @@
 require 'ioc'
 require 'default_command'
+require 'index_command'
 
 module Booty
   class BootstrapRouting
