@@ -4,13 +4,14 @@ require 'expose_binding_behaviour'
 module Booty
   class ViewEngine
 
-    def initialize(defaults = { :master => "master.html.erb"})
+    def initialize(defaults = { })
       @defaults = defaults
     end
 
     def render(options = {})
       combined_options = @defaults.merge(options)
-      erb_from(combined_options[:master], OpenStruct.new(:content => erb_from(combined_options[:template], combined_options[:model])))
+      model = combined_options[:model]
+      erb_from(combined_options[:master], OpenStruct.new(:content => erb_from(combined_options[:template], model), :model => model))
     end
 
     private 

@@ -10,7 +10,7 @@ module Booty
         @result = sut.render(:template => "/view_engine.html.erb", :model => OpenStruct.new(:name => 'mo'))
       end
       it "should convert the template to html" do
-        @result.should == "<html><head></head><body><p>mo</p></body></html>"
+        @result.should == "<html><head><title>TEST</title></head><body><p>mo</p></body></html>"
       end
     end
   end
