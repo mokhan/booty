@@ -3,12 +3,14 @@ require 'expose_binding_behaviour'
 
 module Booty
   class ViewEngine
-    def initialize(defaults = {})
+
+    def initialize(defaults = { :master => "master.html.erb"})
       @defaults = defaults
     end
+
     def render(options = {})
-      html = ERB.new(read_from_file(options[:template])).result(binding_for(options[:model])).chomp
-      ERB.new(read_from_file(@defaults[:master])).result(binding_for(OpenStruct.new(:content => html))).chomp
+      combined_options = @defaults.merge(options)
+      erb_from(combined_options[:master], OpenStruct.new(:content => erb_from(combined_options[:template], combined_options[:model])))
     end
 
     private 
@@ -18,8 +20,13 @@ module Booty
       model.get_binder
     end
 
-    def read_from_file(template)
-      File.read(File.join(@defaults[:root_path], template))
+    def read_from(file)
+      File.read(File.join(@defaults[:root_path], file))
+    end
+
+    def erb_from(file, model)
+      template = ERB.new(read_from(file))
+      template.result(binding_for(model)).chomp
     end
   end
 end
