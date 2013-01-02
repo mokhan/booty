@@ -14,7 +14,7 @@ class BootstrapContainer
       Booty::FrontController.new(@container.resolve(:command_registry), @container.resolve(:view_engine))
     end
     @container.register(:view_engine) do
-      Booty::ViewEngine.new(:root_path => 'lib/commands')
+      Booty::ViewEngine.new(:root_path => 'lib/commands', :master => 'master.html.erb')
     end
     Booty::IOC.bind_to(@container)
   end
