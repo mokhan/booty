@@ -11,7 +11,7 @@ module Booty
       true
     end
     def run_against(request)
-      [404, {"Content-Type" => "text/html"}, [@view_engine.render(:template => "/404.html.erb", :model => OpenStruct.new(:name => "BINDING", :time => Time.now))]]
+      [404, {"Content-Type" => "text/html"}, [@view_engine.render(:template => "/404.html.erb")]]
     end
   end
 end
