@@ -25,8 +25,11 @@ module Booty::Assets
       end
     end
     context "when serving a static asset" do
+      before :each do
+        @result = sut.run_against( { "REQUEST_PATH" => "/assets/js/bootstrap.js" } )
+      end
       it "should serve the static resource" do
-        
+        @result.should == [200, {"Content-Type" => "text/html"}, [File.read('assets/js/bootstrap.js')]]
       end
     end
   end
