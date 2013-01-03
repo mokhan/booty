@@ -5,14 +5,14 @@ require "asset_command"
 
 module Booty
   class BootstrapRouting
-    def initialize(registry = Booty::IOC.resolve(:command_registry), container = Booty::IOC.resolve(:container))
+    def initialize(registry = IOC.resolve(:command_registry), container = IOC.resolve(:container))
       @registry = registry
       @container = container
     end
 
     def run
-      register(Booty::Assets::AssetCommand.new)
-      register(Booty::Dashboard::IndexCommand.new(@container.resolve(:view_engine)))
+      register(Assets::AssetCommand.new)
+      register(Dashboard::IndexCommand.new(@container.resolve(:view_engine)))
       register(DefaultCommand.new(@container.resolve(:view_engine))) { |request| true }
     end
 
