@@ -7,8 +7,17 @@ module Booty
         #/(js|css|png)^/.match(path)
       end
       def run_against(request)
-        content = File.read(File.join(Dir.pwd, request["REQUEST_PATH"]))
-        [200, {"Content-Type" => "text/html"}, [content]]
+        path = request["REQUEST_PATH"]
+        content = File.read(File.join(Dir.pwd, path))
+        if path.include?(".js")
+          return [200, {"Content-Type" => "text/javascript"}, [content]]
+        end
+        if path.include?(".css")
+          return [200, {"Content-Type" => "text/css"}, [content]]
+        end
+        if path.include?(".png")
+          return [200, {"Content-Type" => "image/png"}, [content]]
+        end
       end
     end
   end
