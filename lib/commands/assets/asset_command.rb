@@ -1,23 +1,19 @@
+require 'image'
+require 'stylesheet'
+require 'javascript'
+
 module Booty
   module Assets
     class AssetCommand
+      def initialize(assets = [ Javascript.new, Stylesheet.new, Image.new ])
+        @assets = assets
+      end
       def matches(request)
-        path = request["REQUEST_PATH"]
-        path.include?(".js") || path.include?(".css") || path.include?(".png")
-        #/(js|css|png)^/.match(path)
+        @assets.any? { |asset| asset.matches(request) }
       end
       def run_against(request)
-        path = request["REQUEST_PATH"]
-        content = File.read(File.join(Dir.pwd, path))
-        if path.include?(".js")
-          return [200, {"Content-Type" => "text/javascript"}, [content]]
-        end
-        if path.include?(".css")
-          return [200, {"Content-Type" => "text/css"}, [content]]
-        end
-        if path.include?(".png")
-          return [200, {"Content-Type" => "image/png"}, [content]]
-        end
+        asset = @assets.find { |a| a.matches(request) }
+        asset.run_against(File.read(File.join(Dir.pwd, request["REQUEST_PATH"])))
       end
     end
   end
