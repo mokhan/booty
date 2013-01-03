@@ -2,17 +2,17 @@ require 'ioc'
 
 module Booty
   class Lazy 
-    def initialize(key)
-      @key = key
+    def initialize(resolver = ->() { })
+      @resolver = resolver
     end
 
     def method_missing(name, *args, &block)
-      @target ||= IOC.resolve(@key)
+      @target ||= @resolver.call
       @target.send(name, args, &block)
     end
 
-    def self.load(key)
-      Lazy.new(key)
+    def self.load(key, resolver = ->() { IOC.resolve(key) })
+      Lazy.new(resolver)
     end
   end
 end
