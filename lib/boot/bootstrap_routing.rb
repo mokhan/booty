@@ -11,6 +11,7 @@ module Booty
     end
 
     def run
+      logger.debug("initializing routes")
       register(Assets::AssetCommand.new)
       register(Dashboard::IndexCommand.new(@container.resolve(:view_engine)))
       register(DefaultCommand.new(@container.resolve(:view_engine))) { |request| true }
@@ -19,7 +20,7 @@ module Booty
     private
 
     def register(command)
-      if( block_given? )
+      if block_given?
         @registry.register_route(command) { |request| yield(request) }
       else
         @registry.register_route(command) { |request| command.matches(request) }

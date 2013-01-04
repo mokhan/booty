@@ -19,3 +19,8 @@ module Booty
     end
   end
 end
+class Object
+  def logger
+    Booty::Log.for(self)
+  end
+end
