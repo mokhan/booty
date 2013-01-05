@@ -17,6 +17,14 @@ module Booty
     def resolve_all(key)
       coponents_for(key).map {|item| instantiate(item) }
     end
+    def build(type)
+      constructor = type.instance_method('initialize')
+      dependencies = []
+      constructor.parameters.each do |req, parameter|
+        dependencies.push(resolve(parameter.to_sym))
+      end
+      type.send(:new, *dependencies)
+    end
 
     private
 

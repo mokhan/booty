@@ -69,5 +69,25 @@ module Booty
         @result.should == sut
       end
     end
+    context "when automatically resolving dependencies" do
+      class Child
+        def initialize(mom,dad)
+        end
+        def greeting(message)
+          
+        end
+      end
+      let(:mom) { fake }
+      let(:dad) { fake }
+
+      before :each do
+        sut.register(:mom) { mom }
+        sut.register(:dad) { dad }
+      end
+
+      it "should be able to glue the pieces together automatically" do
+        sut.build(Child).should be_a_kind_of(Child)
+      end
+    end
   end
 end

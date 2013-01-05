@@ -8,7 +8,6 @@ module Booty
     end
     def call(env)
       begin
-        logger.debug("#{env}\r\n")
         @command_registry.command_for(env).run_against(env)
       rescue => e
         html = @view_engine.render(:template => '501.html.erb', :model => e)
