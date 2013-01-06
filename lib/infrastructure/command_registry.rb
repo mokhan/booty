@@ -15,12 +15,14 @@ module Booty
       end
     end
 
-    def register_route(command, &block)
-      @commands.push(RoutedCommand.new(BlockSpecification.new(&block), command))
-    end
-
     def command_for(route)
       @commands.find { |command| command.matches(route) }.command
+    end
+
+    private
+
+    def register_route(command, &block)
+      @commands.push(RoutedCommand.new(BlockSpecification.new(&block), command))
     end
   end
 end

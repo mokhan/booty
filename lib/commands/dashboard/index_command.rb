@@ -11,7 +11,7 @@ module Booty
       def matches(request)
         request["REQUEST_PATH"] == "/"
       end
-      def run_against(request)
+      def run(request)
         html_response(@view_engine.render(:template => "/dashboard/index.html.erb"))
       end
     end

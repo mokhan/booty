@@ -10,8 +10,8 @@ module Booty
       let(:request) { {} }
 
       before :each do
-        sut.register_route(correct_command) { |request| true }
-        sut.register_route(other_command) { |request| false }
+        sut.register(correct_command) { |request| true }
+        sut.register(other_command) { |request| false }
       end
 
       before :each do
@@ -30,10 +30,10 @@ module Booty
       let(:other_command) { fake }
 
       before :each do
-        sut.register_route(command) do |request|
+        sut.register(command) do |request|
           request == "BLAH"
         end
-        sut.register_route(other_command) do |request|
+        sut.register(other_command) do |request|
           request == "MOO"
         end
       end
@@ -45,5 +45,15 @@ module Booty
       end
     end
 
+    context "when registering a route without a block" do
+      let(:command) { fake }
+      before :each do
+        command.stub(:matches).with("mee").and_return(true)
+        sut.register(command)
+      end
+      it "should use the command for matching" do
+        sut.command_for("mee").should == command
+      end
+    end
   end
 end

@@ -10,7 +10,7 @@ module Booty
     def matches(request)
       true
     end
-    def run_against(request)
+    def run(request)
       [404, {"Content-Type" => "text/html"}, [@view_engine.render(:template => "/404.html.erb")]]
     end
   end

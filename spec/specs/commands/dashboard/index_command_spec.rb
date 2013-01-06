@@ -25,7 +25,7 @@ module Booty
           view_engine.stub(:render).with(:template => "/dashboard/index.html.erb").and_return(html)
         end
         before :each do
-          @result = sut.run_against(nil)
+          @result = sut.run(nil)
         end
         it "should display the correct view" do
           @result.should == [200, {"Content-Type" => "text/html"}, [html]]
