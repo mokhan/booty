@@ -19,11 +19,8 @@ module Booty
     end
     def build(type)
       constructor = type.instance_method('initialize')
-      dependencies = []
-      constructor.parameters.each do |req, parameter|
-        dependencies.push(resolve(parameter.to_sym))
-      end
-      type.send(:new, *dependencies)
+      parameters = constructor.parameters.map {|req, parameter| resolve(parameter.to_sym)}
+      type.send(:new, *parameters)
     end
 
     private
