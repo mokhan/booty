@@ -13,8 +13,8 @@ module Booty
     def run
       logger.debug("initializing routes")
       register(Assets::AssetCommand.new)
-      register(Dashboard::IndexCommand.new(@container.resolve(:view_engine)))
-      register(DefaultCommand.new(@container.resolve(:view_engine))) { |request| true }
+      register(@container.build(Dashboard::IndexCommand))
+      register(@container.build(DefaultCommand))
     end
 
     private
