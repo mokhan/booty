@@ -13,16 +13,16 @@ module Booty
       let(:env) { {} }
       before(:each) do
         command_registry.stub(:command_for).with(env).and_return(correct_command)
-        correct_command.stub(:run_against).and_return(response)
+        correct_command.stub(:run).and_return(response)
       end
       before(:each) do
         @result = sut.call(env)
       end
       it "should process the request using the proper command" do
-        correct_command.should have_received(:run_against, env)
+        correct_command.should have_received(:run, env)
       end
       it "should not invoke any other commands" do
-        incorrect_command.should_not have_received(:run_against, env)
+        incorrect_command.should_not have_received(:run, env)
       end
       it "should return the result of the command" do
         @result.should == response

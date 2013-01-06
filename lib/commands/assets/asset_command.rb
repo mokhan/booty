@@ -11,9 +11,9 @@ module Booty
       def matches(request)
         @assets.any? { |asset| asset.matches(request) }
       end
-      def run_against(request)
+      def run(request)
         asset = @assets.find { |a| a.matches(request) }
-        asset.run_against(File.read(File.join(Dir.pwd, request["REQUEST_PATH"])))
+        asset.run(File.read(File.join(Dir.pwd, request["REQUEST_PATH"])))
       end
     end
   end

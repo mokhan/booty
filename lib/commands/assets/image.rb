@@ -4,7 +4,7 @@ module Booty
       def matches(request)
         request["REQUEST_PATH"].include?(".png")
       end
-      def run_against(content)
+      def run(content)
         [200, {"Content-Type" => "image/png"}, [content]]
       end
     end
