@@ -10,8 +10,7 @@ module Booty
       begin
         @command_registry.command_for(env).run(env)
       rescue => e
-        html = @view_engine.render(:template => '501.html.erb', :model => e)
-        [501, {"Content-Type" => "text/html"}, [html]]
+        [501, {"Content-Type" => "text/html"}, [@view_engine.render(:template => '501.html.erb', :model => e)]]
       end
     end
   end
