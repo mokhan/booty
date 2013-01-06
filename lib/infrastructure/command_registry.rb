@@ -16,7 +16,7 @@ module Booty
     end
 
     def command_for(route)
-      @commands.find { |command| command.matches(route) }.command
+      @commands.find { |command| command.matches(route) }
     end
 
     private
