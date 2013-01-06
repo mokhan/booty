@@ -20,11 +20,7 @@ module Booty
     private
 
     def register(command)
-      if block_given?
-        @registry.register_route(command) { |request| yield(request) }
-      else
-        @registry.register_route(command) { |request| command.matches(request) }
-      end
+      @registry.register(command)
     end
   end
 end

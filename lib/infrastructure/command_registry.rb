@@ -7,6 +7,14 @@ module Booty
       @commands = commands
     end
 
+    def register(command)
+      if block_given?
+        register_route(command) { |request| yield(request) }
+      else
+        register_route(command) { |request| command.matches(request) }
+      end
+    end
+
     def register_route(command, &block)
       @commands.push(RoutedCommand.new(BlockSpecification.new(&block), command))
     end
