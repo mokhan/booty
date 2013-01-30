@@ -1,0 +1,8 @@
+# postgres
+
+create a database 
+database: booty
+user: booty
+password: password
+
+createuser booty --superuser --pwprompt --
