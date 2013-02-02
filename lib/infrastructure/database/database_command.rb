@@ -1,4 +1,4 @@
-class Query
+class DatabaseCommand
   def initialize(&lambda)
     @lambda = lambda
   end

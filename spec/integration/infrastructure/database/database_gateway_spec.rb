@@ -1,14 +1,6 @@
 require "spec_helper"
 require 'sequel'
 require 'pg'
-class Command
-  def initialize(&lambda)
-    @lambda = lambda
-  end
-  def run(connection)
-    @lambda.call(connection)
-  end
-end
 
 describe DatabaseGateway do
   let(:connection_factory) { fake }
@@ -31,14 +23,14 @@ describe DatabaseGateway do
       connection.from(:users).insert(:name => 'mo')
     end
     it "should be able to return a result set" do
-      query = Query.new { |c| c.from(:users).all }
+      query = DatabaseQuery.new { |c| c.from(:users).all }
       results = sut.run(query)
       results.should == [:id => 1, :name => 'mo']
     end
   end
   context "when executing a command against the database" do
     it "should run the command against the open connection" do
-      command = Command.new { |c| c.from(:users).insert(:name => 'mo') }
+      command = DatabaseCommand.new { |c| c.from(:users).insert(:name => 'mo') }
       sut.run(command)
       connection.from(:users).count.should == 1
     end
