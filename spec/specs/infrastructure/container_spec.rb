@@ -74,19 +74,24 @@ module Booty
         def initialize(mom,dad)
         end
         def greeting(message)
-          
         end
       end
-      let(:mom) { fake }
-      let(:dad) { fake }
 
-      before :each do
-        sut.register(:mom) { mom }
-        sut.register(:dad) { dad }
+      context "when the dependencies have been registered" do
+        let(:mom) { fake }
+        let(:dad) { fake }
+        before :each do
+          sut.register(:mom) { mom }
+          sut.register(:dad) { dad }
+        end
+        it "should be able to glue the pieces together automatically" do
+          sut.build(Child).should be_a_kind_of(Child)
+        end
       end
-
-      it "should be able to glue the pieces together automatically" do
-        sut.build(Child).should be_a_kind_of(Child)
+      context "when a component cannot automatically be constructed" do
+        it "should return a nil instance" do
+          sut.build(Child).should be_nil
+        end
       end
     end
   end

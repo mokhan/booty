@@ -18,9 +18,16 @@ module Booty
       coponents_for(key).map {|item| instantiate(item) }
     end
     def build(type)
-      constructor = type.instance_method('initialize')
-      parameters = constructor.parameters.map {|req, parameter| resolve(parameter.to_sym)}
-      type.send(:new, *parameters)
+      begin
+        constructor = type.instance_method('initialize')
+        parameters = constructor.parameters.map do |req, parameter|
+          resolve(parameter.to_sym)
+        end
+        type.send(:new, *parameters)
+      rescue
+        logger.error("I could not create: #{type}")
+        nil
+      end
     end
 
     private

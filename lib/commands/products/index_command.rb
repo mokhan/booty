@@ -5,9 +5,9 @@ module Booty
     class IndexCommand
       include HttpCommandBehaviour
 
-      def initialize(view_engine, repository)
+      def initialize(view_engine, products_repository)
         @view_engine = view_engine
-        @repository = repository
+        @repository = products_repository
       end
       def matches(request)
         request["REQUEST_PATH"] == "/products"

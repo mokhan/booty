@@ -6,6 +6,7 @@ module Booty
       @@log_factory=log_factory
     end
     def self.for(target)
+      @@log_factory ||= ConsoleLogFactory.new
       @@log_factory.create_for(target)
     end
   end

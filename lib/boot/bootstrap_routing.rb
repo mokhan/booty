@@ -22,7 +22,7 @@ module Booty
     private
 
     def register(command)
-      @registry.register(command)
+      @registry.register(command) if command
     end
   end
 end
