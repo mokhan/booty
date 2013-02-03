@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 module Booty
-  module Booty::Dashboard
+  module Dashboard
     describe IndexCommand do
       let(:sut) { IndexCommand.new(view_engine) }
       let(:view_engine) { fake }
