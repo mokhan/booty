@@ -23,6 +23,7 @@ module Booty
     def build!(type)
       constructor = type.instance_method('initialize')
       parameters = constructor.parameters.map do |req, parameter|
+        #logger.info("attempting to resolve #{parameter}")
         resolve(parameter.to_sym)
       end
       type.send(:new, *parameters)

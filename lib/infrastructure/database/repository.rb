@@ -1,3 +1,5 @@
+require 'database_query'
+
 class Repository
   def initialize(clazz, table, database_gateway = DatabaseGateway.new( DatabaseConnectionFactory.new(DatabaseConfiguration.new, SequelConnectionProvider.new)))
     @clazz = clazz
