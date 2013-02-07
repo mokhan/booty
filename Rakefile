@@ -1,3 +1,5 @@
+require 'yaml'
+
 namespace :generate do
   task :migration, :title do |t, args|
     filename = "lib/infrastructure/database/migrations/#{Time.now.strftime('%Y%m%d%H%M%S%L')}_#{args.title}.rb"
@@ -13,7 +15,13 @@ end
 
 namespace :db do
   task :migrate do
-    sh 'sequel -m lib/infrastructure/database/migrations postgres://localhost/booty'
+    all_configuration = YAML.load_file(File.join(File.dirname(__FILE__),'db/configuration.yml'))
+    configuration = all_configuration[ENV["BOOTY_ENV"] || "test"]
+    sh "sequel -m db/migrations postgres://#{configuration["host"]}/#{configuration["database"]}"
   end
 end
 
+task :spec => 'db:migrate' do
+  sh 'rspec spec'
+end
+task :default => :spec
