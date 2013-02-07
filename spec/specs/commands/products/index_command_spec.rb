@@ -12,7 +12,7 @@ module Booty
         let(:products) { [fake] }
 
         before :each do
-          view_engine.stub(:render).with({:template => '/products/index.html.erb', :model => products}).and_return(html)
+          view_engine.stub(:render).with({:template => '/products/index.html.erb', :model => OpenStruct.new(:items => products)}).and_return(html)
           repository.stub(:find_all).and_return(products)
         end
         before :each do

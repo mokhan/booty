@@ -1,4 +1,5 @@
 require 'yaml'
+require 'pg'
 
 class DatabaseConfiguration
   def configure(connection)

@@ -13,7 +13,7 @@ module Booty
         request["REQUEST_PATH"] == "/products"
       end
       def run(request)
-        html_response(@view_engine.render(:template => "/products/index.html.erb", :model => @repository.find_all))
+        html_response(@view_engine.render(:template => "/products/index.html.erb", :model => OpenStruct.new(:items => @repository.find_all)))
       end
     end
   end
