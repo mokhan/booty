@@ -1,0 +1,20 @@
+development:
+  adapter: postgresql
+  database: booty_development
+  host: localhost
+  username: booty
+  password: password
+
+test:
+  adapter: postgresql
+  database: booty_test
+  host: localhost
+  username: booty
+  password: password
+
+production:
+  adapter: postgresql
+  database: booty_production
+  host: localhost
+  username: booty
+  password: password

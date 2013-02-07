@@ -8,7 +8,7 @@ describe DatabaseConfiguration do
       sut.configure(connection)
     end
     it "should supply the proper settings" do
-      connection.should have_received(:postgres, 'booty', :user => 'booty', :password => 'password', :host => 'localhost')
+      connection.should have_received(:postgres, 'booty_test', :user => 'booty', :password => 'password', :host => 'localhost')
     end
   end
 end
