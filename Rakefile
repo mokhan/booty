@@ -21,7 +21,20 @@ namespace :db do
   end
 end
 
-task :spec => 'db:migrate' do
-  sh 'rspec spec'
+namespace :spec do
+  task :all => [:unit, :integration, :acceptance]
+
+  task :unit => 'db:migrate' do
+    sh 'rspec spec/specs'
+  end
+  task :integration => 'db:migrate' do
+    sh 'rspec spec/integration'
+  end
+  task :acceptance => 'db:migrate' do
+    sh 'rackup &'
+    sh 'rspec spec/acceptance'
+    sh 'killall rackup'
+  end
 end
+task :spec => 'spec:all'
 task :default => :spec
