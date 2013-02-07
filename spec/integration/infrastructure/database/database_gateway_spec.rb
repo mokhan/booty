@@ -1,18 +1,15 @@
 require "spec_helper"
-require 'sequel'
-require 'pg'
 
 describe DatabaseGateway do
-  let(:connection_factory) { fake }
+  let(:connection_factory) { DatabaseConnectionFactory.new(DatabaseConfiguration.new, SequelConnectionProvider.new) }
   let(:sut) { DatabaseGateway.new(connection_factory) }
-  let(:connection) { Sequel.postgres('booty', :user => 'booty', :password => 'password', :host => 'localhost') }
+  let(:connection) { Sequel.postgres('booty_test', :user => 'booty', :password => 'password', :host => 'localhost') }
 
   before :each do
     connection.create_table :users do
       primary_key :id
       String :name
     end
-    connection_factory.stub(:create_connection).and_return(connection)
   end
   after(:each) do
     connection.drop_table :users
