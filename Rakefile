@@ -13,7 +13,7 @@ end
 
 namespace :db do
   task :migrate do
-
+    sh 'sequel -m lib/infrastructure/database/migrations postgres://localhost/booty'
   end
 end
 
