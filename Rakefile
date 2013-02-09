@@ -19,6 +19,11 @@ namespace :db do
     configuration = all_configuration[ENV["BOOTY_ENV"] || "test"]
     sh "sequel -m db/migrations postgres://#{configuration["host"]}/#{configuration["database"]}"
   end
+  task :create do
+    all_configuration = YAML.load_file(File.join(File.dirname(__FILE__),'db/configuration.yml'))
+    configuration = all_configuration[ENV["BOOTY_ENV"] || "test"]
+    sh "sequel -m db/migrations postgres://#{configuration["host"]}/#{configuration["database"]}"
+  end
 end
 
 namespace :spec do

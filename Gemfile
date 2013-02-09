@@ -1,6 +1,7 @@
 source "https://rubygems.org"
+gem 'rake'
 gem 'rack'
-gem 'mongrel'
+gem 'mongrel', '>= 1.1.5.pre'
 gem 'rspec'
 gem 'fakes-rspec'
 gem 'watir-webdriver'
