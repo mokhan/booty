@@ -2,7 +2,7 @@ require 'yaml'
 
 namespace :generate do
   task :migration, :title do |t, args|
-    filename = "lib/infrastructure/database/migrations/#{Time.now.strftime('%Y%m%d%H%M%S%L')}_#{args.title}.rb"
+    filename = "db/migrations/#{Time.now.strftime('%Y%m%d%H%M%S%L')}_#{args.title}.rb"
     puts "Creating new migration: #{filename}"
     open(filename, 'w') do |post|
       post.puts "Sequel.migration do"
