@@ -1,18 +1,7 @@
 require "spec_helper"
-module RoutingModule
-  def self.handles(routing)
-    
-  end
-end
 
 class RoutingCommand
-  def self.handles(routing)
-    define_method(:matches) do |request|
-      specification = RouteRequestSpecification.new
-      specification.handles(routing)
-      specification.matches(request)
-    end
-  end
+  include RoutingModule
 
   handles :uri => /\/products$/, :verb => :GET
 end
