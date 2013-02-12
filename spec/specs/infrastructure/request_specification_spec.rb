@@ -1,6 +1,6 @@
 require "spec_helper"
 
-class RequestSpecification
+class RouteRequestSpecification
   def handles(route)
     @options = route
   end
@@ -15,18 +15,18 @@ class RequestSpecification
     @options.has_key?(:verb) ? @options[:verb].to_s.upcase == request["REQUEST_METHOD"] : true
   end
 end
-describe RequestSpecification do
-  let(:sut) { RequestSpecification.new  }
+describe RouteRequestSpecification do
+  let(:sut) { RouteRequestSpecification.new  }
 
   context "when matching a uri path" do
-    before { sut.handles(:uri => /products/) }
+    before { sut.handles(:uri => /^\/products$/) }
 
     it "should match when given the proper uri" do
       request = { "REQUEST_PATH" => '/products'}
       sut.matches(request).should be_true
     end
     it "should not match a uri for a different path" do
-      request = { "REQUEST_PATH" => '/food'}
+      request = { "REQUEST_PATH" => '/products/1'}
       sut.matches(request).should be_false
     end
   end
@@ -43,6 +43,19 @@ describe RequestSpecification do
     end
     it "should not match if the verb is incorrect" do
       request = { "REQUEST_PATH" => '/posters', "REQUEST_METHOD" => "GET" }
+      sut.matches(request).should be_false
+    end
+  end
+  context "when matching a route with an id" do
+    before :each do
+      sut.handles(:uri => /^\/products\/[0-9]+$/)
+    end
+    it "should match when given a proper route" do
+      request = { "REQUEST_PATH" => '/products/100' }
+      sut.matches(request).should be_true
+    end
+    it "should not match other routes" do
+      request = { "REQUEST_PATH" => '/products' }
       sut.matches(request).should be_false
     end
   end
