@@ -5,9 +5,7 @@ module RoutingModule
   module ClassMethods
     def handles(routing)
       define_method(:matches) do |request|
-        specification = RouteRequestSpecification.new
-        specification.handles(routing)
-        specification.matches(request)
+        RequestSpecification.new(routing).matches(request)
       end
     end
   end

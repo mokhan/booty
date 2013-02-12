@@ -1,10 +1,9 @@
 require "spec_helper"
 
-describe RouteRequestSpecification do
-  let(:sut) { RouteRequestSpecification.new  }
+describe RequestSpecification do
 
   context "when matching a uri path" do
-    before { sut.handles(:uri => /^\/products$/) }
+    let(:sut) { RequestSpecification.new :uri => /^\/products$/ }
 
     it "should match when given the proper uri" do
       request = { "REQUEST_PATH" => '/products'}
@@ -16,7 +15,7 @@ describe RouteRequestSpecification do
     end
   end
   context "when matching a path and a verb" do
-    before { sut.handles(:uri => /posters/, :verb => :PUT) }
+    let(:sut) { RequestSpecification.new :uri => /posters/, :verb => :PUT }
 
     it "should match when given the proper request" do
       request = { "REQUEST_PATH" => '/posters', "REQUEST_METHOD" => "PUT" }
@@ -32,9 +31,8 @@ describe RouteRequestSpecification do
     end
   end
   context "when matching a route with an id" do
-    before :each do
-      sut.handles(:uri => /^\/products\/[0-9]+$/)
-    end
+    let(:sut) { RequestSpecification.new :uri => /^\/products\/[0-9]+$/ }
+
     it "should match when given a proper route" do
       request = { "REQUEST_PATH" => '/products/100' }
       sut.matches(request).should be_true

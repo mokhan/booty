@@ -1,5 +1,5 @@
-class RouteRequestSpecification
-  def handles(route)
+class RequestSpecification
+  def initialize(route)
     @options = route
   end
   def matches(request)
