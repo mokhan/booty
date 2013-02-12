@@ -1,12 +1,8 @@
-require 'http_command_behaviour'
-require 'routing_module'
+require "route_command"
 
 module Booty
   module Dashboard
-    class IndexCommand 
-      include HttpCommandBehaviour
-      include RoutingModule
-
+    class IndexCommand < Booty::RouteCommand
       handles :uri => /\/$/, :verb => :GET
 
       def initialize(view_engine)
