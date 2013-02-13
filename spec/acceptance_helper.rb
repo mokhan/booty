@@ -5,7 +5,7 @@ def navigate_to(url, &block)
   let(:sut) { Watir::Browser.new }
   before :all do
     block.call if block_given?
-    sut.goto url
+    sut.goto "http://localhost:9292#{url}"
   end
   after :all do
     sut.close

@@ -2,7 +2,7 @@ require "acceptance_helper"
 
 module Booty
   describe "/products" do
-    navigate_to 'http://localhost:9292/products' do
+    navigate_to '/products' do
       TestDatabaseGateway.connection.from(:products).insert(:name => "Book")
       TestDatabaseGateway.connection.from(:products).insert(:name => "Phone")
       TestDatabaseGateway.connection.from(:products).insert(:name => "Lamp")

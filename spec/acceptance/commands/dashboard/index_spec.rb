@@ -2,7 +2,7 @@ require "acceptance_helper"
 
 module Booty
   describe "/" do
-    navigate_to 'http://localhost:9292/'
+    navigate_to '/'
 
     it "should say hello world" do
       sut.text.include?('Hello World').should be_true
