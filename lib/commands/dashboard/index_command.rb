@@ -3,7 +3,7 @@ require "route_command"
 module Booty
   module Dashboard
     class IndexCommand < Booty::RouteCommand
-      handles :uri => /\/$/, :verb => :GET
+      handles :uri => /^\/$/, :verb => :GET
 
       def initialize(view_engine)
         @view_engine = view_engine
