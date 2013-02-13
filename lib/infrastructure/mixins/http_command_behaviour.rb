@@ -5,7 +5,7 @@ module Booty
       options = options.merge(defaults)
       [options[:status], {"Content-Type" => options[:content_type]}, [options[:content]]]
     end
-    def html_response(html)
+    def render_html(html)
       respond_with(:content_type => "text/html", :content => html)
     end
   end

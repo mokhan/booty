@@ -1,12 +1,12 @@
 require "spec_helper"
 
 class RoutingCommand
-  include RoutingModule
+  include RoutingBehaviour
 
   handles :uri => /\/products$/, :verb => :GET
 end
 
-describe RoutingModule do
+describe RoutingBehaviour do
   let(:sut) { RoutingCommand.new }
   context "when declaratively describing what routes are handled" do
     it "should match proper routes" do

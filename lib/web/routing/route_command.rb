@@ -4,6 +4,6 @@ require 'routing_module'
 module Booty
   class RouteCommand
     include HttpCommandBehaviour
-    include RoutingModule
+    include RoutingBehaviour
   end
 end

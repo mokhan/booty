@@ -6,6 +6,6 @@ class Booty::Products::NewCommand < Booty::RouteCommand
   end
 
   def run(request)
-    html_response(@view_engine.render(:template => '/products/new.html.erb'))
+    render_html(@view_engine.render(:template => '/products/new.html.erb'))
   end
 end

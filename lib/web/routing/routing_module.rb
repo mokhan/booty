@@ -1,6 +1,6 @@
 require "request_specification"
 
-module RoutingModule
+module RoutingBehaviour
   def self.included base
     base.extend ClassMethods
   end
