@@ -11,11 +11,15 @@ module Booty
     end
 
     it "should route to the dashboard" do
-      registry.command_for({ "REQUEST_PATH" => "/", "REQUEST_METHOD" => "GET" }).command.should be_instance_of(Booty::Dashboard::IndexCommand)
+      command_for({ "REQUEST_PATH" => "/", "REQUEST_METHOD" => "GET" }).should be_instance_of(Booty::Dashboard::IndexCommand)
     end
 
     it "should route to the 404 handler" do
-      registry.command_for({ "REQUEST_PATH" => "/blah/blah" }).command.should be_instance_of(Booty::DefaultCommand)
+      command_for({ "REQUEST_PATH" => "/blah/blah" }).should be_instance_of(Booty::DefaultCommand)
+    end
+
+    def command_for(request)
+      registry.command_for(request).command
     end
   end
 end
