@@ -1,15 +1,9 @@
-require "spec_helper"
-require 'watir-webdriver'
+require "acceptance_helper"
 
 module Booty
   describe "/blah/blah" do
-    let(:sut) { Watir::Browser.new }
-    before :all do
-      sut.goto 'http://localhost:9292/blah/blah/'
-    end
-    after :all do
-      sut.close
-    end
+    navigate_to '/blah/blah/'
+
     it "should say 404" do
       sut.text.include?('404 - Page Not Found').should be_true
     end

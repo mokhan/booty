@@ -1,19 +1,13 @@
-require "spec_helper"
-require 'watir-webdriver'
+require "acceptance_helper"
 
 module Booty
   describe "/products" do
-    let(:sut) { Watir::Browser.new }
-    before :all do
+    navigate_to '/products' do
       TestDatabaseGateway.connection.from(:products).insert(:name => "Book")
       TestDatabaseGateway.connection.from(:products).insert(:name => "Phone")
       TestDatabaseGateway.connection.from(:products).insert(:name => "Lamp")
-      sut.goto 'http://localhost:9292/products'
     end
-    after :all do
-      sut.close
-      TestDatabaseGateway.connection.from(:products).delete
-    end
+
     it "should say hello world" do
       sut.text.include?('Products').should be_true
     end
