@@ -1,5 +1,4 @@
-require "spec_helper"
-require 'watir-webdriver'
+require "acceptance_helper"
 
 module Booty
   describe "/products" do
