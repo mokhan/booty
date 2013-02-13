@@ -16,6 +16,7 @@ module Booty
       register(Assets::AssetCommand.new)
       register(@container.build(Dashboard::IndexCommand))
       register(@container.build(Products::IndexCommand))
+      register(@container.build(Products::NewCommand))
       register(@container.build(DefaultCommand))
     end
 

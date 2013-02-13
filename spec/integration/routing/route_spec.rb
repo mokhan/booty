@@ -10,8 +10,18 @@ module Booty
       BootstrapRouting.new(registry, container).run
     end
 
-    it "should route to the dashboard" do
-      command_for({ "REQUEST_PATH" => "/", "REQUEST_METHOD" => "GET" }).should be_instance_of(Booty::Dashboard::IndexCommand)
+    context "dashboard" do
+      it "should route to the dashboard" do
+        command_for({ "REQUEST_PATH" => "/", "REQUEST_METHOD" => "GET" }).should be_instance_of(Booty::Dashboard::IndexCommand)
+      end
+    end
+    context "products" do
+      it "should route to the index" do
+        command_for({ "REQUEST_PATH" => "/products", "REQUEST_METHOD" => "GET" }).should be_instance_of(Booty::Products::IndexCommand)
+      end
+      it "should route to the new page" do
+        command_for({ "REQUEST_PATH" => "/products/new", "REQUEST_METHOD" => "GET" }).should be_instance_of(Booty::Products::NewCommand)
+      end
     end
 
     it "should route to the 404 handler" do
