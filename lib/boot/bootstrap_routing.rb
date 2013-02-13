@@ -2,6 +2,7 @@ require 'ioc'
 require 'default_command'
 require_relative '../commands/dashboard/index_command'
 require_relative '../commands/products/index_command'
+require_relative '../commands/products/new_command'
 require "asset_command"
 
 module Booty

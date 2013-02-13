@@ -5,11 +5,14 @@ describe Booty::Products::NewCommand do
   let(:view_engine) { fake }
 
   context "when run" do
+    let(:html) { DateTime.now.to_s }
+
     before :each do
-      sut.run({})
+      view_engine.stub(:render).with({:template => '/products/new.html.erb'}).and_return(html)
+      @result = sut.run({})
     end
     it "should render the proper view" do
-      view_engine.should have_received(:render, :template => 'products/new.html.erb')
+      @result.should == [200, {"Content-Type" => "text/html"}, [html]]
     end
   end
 end
