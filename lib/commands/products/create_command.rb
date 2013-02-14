@@ -7,6 +7,7 @@ class Booty::Products::CreateCommand < Booty::RouteCommand
   def run(request)
     form = form_from(request)
     @repository.save(Product.new(:name => form["name"]))
+    [301, {"Location" => '/products'}, nil]
   end
 
   private 

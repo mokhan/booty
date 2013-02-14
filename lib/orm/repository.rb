@@ -9,4 +9,7 @@ class Repository
   def find_all
     @database_gateway.run(DatabaseQuery.new{|c| c.from(@table).all }).map {|item| @clazz.new(item) }
   end
+  def save(item)
+    
+  end
 end
