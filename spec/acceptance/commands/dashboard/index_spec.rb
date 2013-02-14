@@ -5,7 +5,7 @@ module Booty
     navigate_to '/'
 
     it "should say hello world" do
-      sut.text.include?('Hello World').should be_true
+      sut.text.include?('Hello, world!').should be_true
     end
     it "should have a title" do
       sut.title.should == 'Hello World - Booty'
