@@ -1,6 +1,8 @@
-class Booty::Products::CreateCommand
-  def initialize(repository)
-    @repository = repository
+class Booty::Products::CreateCommand < Booty::RouteCommand
+  handles :uri => /\/products$/, :method => :POST
+
+  def initialize(products_repository)
+    @repository = products_repository
   end
   def run(request)
     form = form_from(request)
