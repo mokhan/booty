@@ -32,9 +32,7 @@ namespace :spec do
     sh 'rspec spec/integration'
   end
   task :acceptance => 'db:migrate' do
-    sh 'rackup &'
     sh 'rspec spec/acceptance'
-    sh 'killall rackup'
   end
 end
 task :spec => 'spec:all'
