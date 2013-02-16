@@ -17,13 +17,9 @@ namespace :db do
   task :migrate do
     all_configuration = YAML.load_file(File.join(File.dirname(__FILE__),'db/configuration.yml'))
     configuration = all_configuration[ENV["BOOTY_ENV"] || "test"]
-    sh "sequel -m db/migrations postgres://#{configuration["host"]}/#{configuration["database"]}"
+    sh "sequel -m db/migrations -E postgres://#{configuration["host"]}/#{configuration["database"]}"
   end
-  task :create do
-    all_configuration = YAML.load_file(File.join(File.dirname(__FILE__),'db/configuration.yml'))
-    configuration = all_configuration[ENV["BOOTY_ENV"] || "test"]
-    sh "sequel -m db/migrations postgres://#{configuration["host"]}/#{configuration["database"]}"
-  end
+  task :create => 'db:migrate'
 end
 
 namespace :spec do
