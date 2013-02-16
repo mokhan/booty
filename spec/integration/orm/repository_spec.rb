@@ -43,4 +43,19 @@ describe Repository do
       product.id.should be > 0
     end
   end
+  context "when saving an existing item" do
+    before :each do
+      TestDatabaseGateway.connection.from(:products).insert(:name => 'foo')
+      result = sut.find_all.first
+      result.change_name('bar')
+      sut.save(result)
+    end
+    after :each do
+      TestDatabaseGateway.connection.from(:products).delete
+    end
+    it "should update the product with the latest changes" do
+      found = TestDatabaseGateway.connection.from(:products).first
+      found[:name].should == 'bar'
+    end
+  end
 end
