@@ -12,22 +12,29 @@ def navigate_to(url, &block)
     TestDatabaseGateway.delete_all
   end
 end
-class Background
-  def self.pid=(new_pid)
-    @@pid = new_pid
+
+class BackgroundJob
+  def initialize(process)
+    @process = process
   end
-  def self.pid
-    @@pid
+  def start
+    @pid = fork do
+      exec @process
+    end
+  end
+  def stop
+    Process.kill "TERM", @pid if @pid
+    Process.wait @pid if @pid
   end
 end
 RSpec.configure do |config|
+  jobs = []
+  jobs.push(BackgroundJob.new('rackup'))
+
   config.before(:suite) do
-    Background.pid = fork do
-      exec 'rackup'
-    end
+    jobs.each { |job| job.start }
   end
   config.after(:suite) do
-    Process.kill "TERM", Background.pid
-    Process.wait Background.pid
+    jobs.each { |job| job.stop }
   end
 end
