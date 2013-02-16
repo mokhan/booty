@@ -1,5 +1,6 @@
 require 'database_query'
 require "database_command"
+require 'expose_binding_behaviour'
 
 class Repository
   def initialize(clazz, table, database_gateway)
@@ -12,7 +13,7 @@ class Repository
   end
   def save(item)
     attributes = item.attributes
-    if attributes[:id] > 0 
+    if attributes[:id] > 0
     else
       @database_gateway.run(prepare_insert_command_for(item))
     end
@@ -21,9 +22,10 @@ class Repository
   private
 
   def prepare_insert_command_for(item)
-    attributes = item.attributes
+    item.extend(Booty::ExposeBindingBehaviour)
     DatabaseCommand.new do |connection|
-      item.id = connection[@table].insert(attributes.delete_if {|key, value| key == :id } )
+      id = connection[@table].insert(item.attributes.delete_if {|key, value| key == :id } )
+      eval("@id=#{id}", item.get_binder)
     end
   end
 end
