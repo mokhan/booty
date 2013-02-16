@@ -27,4 +27,20 @@ describe Repository do
       @results.first.id.should_not be_nil
     end
   end
+  context "when saving a new item" do
+    let(:product) { Product.new(:name => 'blah') }
+    before :each do
+      sut.save(product)
+    end
+    after :each do
+      TestDatabaseGateway.delete_all
+    end
+    it "should insert a new record into the database" do
+      found = TestDatabaseGateway.connection.from(:products)
+      found.count.should == 1
+    end
+    it "should update the product with its new id" do
+      product.id.should be > 0
+    end
+  end
 end
