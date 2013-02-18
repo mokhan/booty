@@ -14,6 +14,7 @@ describe Product do
   context "when a product has not been saved" do
     it "should have a default id of -1" do
       Product.new(:name => '').id.should == -1
+      Product.new().id.should == -1
     end
   end
   context "when displaying the product" do
