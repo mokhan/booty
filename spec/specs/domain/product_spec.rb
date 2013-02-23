@@ -17,14 +17,6 @@ describe Product do
       Product.new.id.should == -1
     end
   end
-  context "when displaying the product" do
-    let(:result) { sut.to_s }
-
-    it "should dump the value of each attribute" do
-      result.should include sut.id.to_s
-      result.should include sut.name
-    end
-  end
   context "when comparing two products" do
     context "when they have the same id" do
       it "should be equal" do
