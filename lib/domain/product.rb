@@ -20,11 +20,9 @@ class DomainObject
   end
 
   def to_s
-    result = ''
-    instance_variables.each do |variable|
-      result << "#{variable}: #{instance_variable_get(variable)} "
-    end
-    result
+    instance_variables.map do |variable| 
+      "#{variable}: #{instance_variable_get(variable)} "
+    end.join
   end
 end
 
