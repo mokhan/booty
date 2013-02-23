@@ -19,4 +19,9 @@ class Product < DomainObject
   def to_s
     "#{id} #{name}"
   end
+  def ==(other)
+    return true if other.object_id == object_id
+    return false if self.id == -1 || other.class != self.class
+    id == other.id
+  end
 end
