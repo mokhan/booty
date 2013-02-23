@@ -14,16 +14,19 @@ class DomainObject
 
   def initialize(options = {})
     @id = options[:id] || DEFAULT_ID
+    options.each do |key, value|
+      instance_variable_set("@#{key}".to_sym, value)
+    end
   end
 end
 
 class Product < DomainObject
   attr_reader :name
 
-  def initialize(attributes = {})
-    super
-    @name = attributes[:name]
-  end
+  #def initialize(attributes = {})
+    #super
+    #@name = attributes[:name]
+  #end
 
   def change_name(new_name)
     @name = new_name
