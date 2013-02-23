@@ -1,7 +1,9 @@
 require "identifiable"
+require "property_bag"
 
 class DomainObject
   include Identifiable
+  include PropertyBag
 
   def initialize(attributes = {})
     @id = attributes[:id] || DEFAULT_ID
@@ -12,14 +14,7 @@ class DomainObject
 
   def to_s
     instance_variables.map do |variable|
-      "#{variable}: #{instance_variable_get(variable)} "
-    end.join
-  end
-
-  def attributes
-    items = instance_variables.map do |variable|
-      [variable.to_s.gsub(/@/, '').to_sym, instance_variable_get(variable)]
-    end
-    Hash[items]
+      ", #{variable}: #{instance_variable_get(variable)}"
+    end.unshift(self.class.to_s).join
   end
 end

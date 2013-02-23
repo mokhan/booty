@@ -17,5 +17,9 @@ describe DomainObject do
     it "should include the color" do
       result.should include "color: blue"
     end
+
+    it "should include the name of the class" do
+      result.should include sut.class.to_s
+    end
   end
 end
