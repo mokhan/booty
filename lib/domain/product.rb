@@ -23,11 +23,6 @@ end
 class Product < DomainObject
   attr_reader :name
 
-  #def initialize(attributes = {})
-    #super
-    #@name = attributes[:name]
-  #end
-
   def change_name(new_name)
     @name = new_name
   end

@@ -54,4 +54,13 @@ describe Product do
       end
     end
   end
+  context "when creating an instance" do
+    let(:product){ Product.new(:id => 1, :name => 'blah', :color => 'black') }
+
+    it "should create an instance variable for each key in the attribute hash" do
+      product.instance_variable_get(:@id).should == 1
+      product.instance_variable_get(:@name).should == 'blah'
+      product.instance_variable_get(:@color).should == 'black'
+    end
+  end
 end
