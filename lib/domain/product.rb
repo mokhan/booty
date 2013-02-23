@@ -1,8 +1,14 @@
 
 class DomainObject
   attr_reader :id
+  DEFAULT_ID = -1
   def initialize(options = {})
-    @id = options[:id] || -1
+    @id = options[:id] || DEFAULT_ID
+  end
+  def ==(other)
+    return true if other.object_id == object_id
+    return false if self.id == DEFAULT_ID || other.class != self.class
+    id == other.id
   end
 end
 
@@ -18,10 +24,5 @@ class Product < DomainObject
   end
   def to_s
     "#{id} #{name}"
-  end
-  def ==(other)
-    return true if other.object_id == object_id
-    return false if self.id == -1 || other.class != self.class
-    id == other.id
   end
 end
