@@ -18,6 +18,14 @@ class DomainObject
       instance_variable_set("@#{key}".to_sym, value)
     end
   end
+
+  def to_s
+    result = ''
+    instance_variables.each do |variable|
+      result << "#{variable}: #{instance_variable_get(variable)} "
+    end
+    result
+  end
 end
 
 class Product < DomainObject
@@ -25,9 +33,5 @@ class Product < DomainObject
 
   def change_name(new_name)
     @name = new_name
-  end
-
-  def to_s
-    "#{id} #{name}"
   end
 end
