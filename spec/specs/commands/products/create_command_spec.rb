@@ -10,8 +10,8 @@ describe Booty::Products::CreateCommand do
     let(:request) { fake }
 
     before :each do
+      request.stub(:payload).and_return({:product => {:name => 'blah'}})
       Product.stub(:new).with(:name => 'blah').and_return(product)
-      request.stub(:payload).and_return({:name => 'blah'})
       @result = sut.respond_to(request)
     end
 

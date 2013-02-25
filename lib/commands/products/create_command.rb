@@ -12,6 +12,6 @@ class Booty::Products::CreateCommand < Booty::RouteCommand
 
   private 
   def map_from(payload)
-    Product.new(:name => payload[:name])
+    Product.new(payload[:product])
   end
 end
