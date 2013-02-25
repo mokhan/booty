@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'rack'
 
 describe Booty::Products::CreateCommand do
   let(:sut) { Booty::Products::CreateCommand.new(repository) }
@@ -6,12 +7,12 @@ describe Booty::Products::CreateCommand do
 
   context "when creating a new product" do
     let(:product) { fake }
-    let(:form) { StringIO.new }
+    let(:request) { fake }
 
     before :each do
-      form.puts "name=blah"
       Product.stub(:new).with(:name => 'blah').and_return(product)
-      @result = sut.run({ "rack.input" => form })
+      request.stub(:payload).and_return({:name => 'blah'})
+      @result = sut.respond_to(request)
     end
 
     it "should save a new product" do
@@ -19,7 +20,7 @@ describe Booty::Products::CreateCommand do
     end
 
     it "should redirect to the product listing" do
-      @result.should == [301, {"Location" => '/products'}, nil]
+      @result.should == [301, {"Location" => '/products'}, []]
     end
   end
 end
