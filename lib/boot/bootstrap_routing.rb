@@ -1,10 +1,6 @@
 require 'ioc'
-require 'default_command'
-require_relative '../commands/dashboard/index_command'
-require_relative '../commands/products/index_command'
-require_relative '../commands/products/new_command'
-require_relative '../commands/products/create_command'
-require "asset_command"
+require 'command_proxy'
+Dir["#{File.dirname(__FILE__)}/../commands/**/*.rb"].each { |f| load(f) }
 
 module Booty
   class BootstrapRouting
@@ -16,10 +12,11 @@ module Booty
     def run
       logger.debug("initializing routes")
       register(Assets::AssetCommand.new)
-      register(@container.build(Dashboard::IndexCommand))
-      register(@container.build(Products::IndexCommand))
-      register(@container.build(Products::NewCommand))
-      register(@container.build(Products::CreateCommand))
+      register(proxy_to(Dashboard::IndexCommand))
+      register(proxy_to(Products::IndexCommand))
+      register(proxy_to(Products::IndexCommand))
+      register(proxy_to(Products::NewCommand))
+      register(proxy_to(Products::CreateCommand))
       register(@container.build(DefaultCommand))
     end
 
@@ -27,6 +24,10 @@ module Booty
 
     def register(command)
       @registry.register(command) if command
+    end
+
+    def proxy_to(command)
+      CommandProxy.new(command, @container)
     end
   end
 end
