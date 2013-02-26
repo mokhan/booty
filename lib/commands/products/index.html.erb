@@ -24,14 +24,23 @@
   </div><!--/span-->
   <div class="span9">
     <h1>Products</h1>
+    <hr />
     <a href="/products/new">New</a>
-    <table>
+    <table class="table table-striped table-bordered table-hover table-condensed">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>name</th>
+        </tr>
+      </thead>
+      <tbody>
       <% self.items.each do |item| %>
         <tr>
           <td><%= item.id %></td>
-          <td><%= item.name %></td>
+          <td><a href="/products/<%= item.id %>"><%= item.name %></a></td>
         </tr>
       <% end %>
+      </tbody>
     </table>
   </div><!--/span-->
 </div><!--/row-->
