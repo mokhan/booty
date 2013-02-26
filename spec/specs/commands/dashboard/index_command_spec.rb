@@ -11,11 +11,17 @@ module Booty
           it "should indicate that it can process the request" do
             sut.matches(request).should be_true
           end
+          it "should have a class method that matches the request" do
+            IndexCommand.matches(request).should be_true
+          end
         end
         context "when it is for another path" do
           let(:request) { { "REQUEST_PATH"=>"/hi/mo/1", "REQUEST_METHOD" => "GET" } }
           it "should indicate that it cannot process the request" do
             sut.matches(request).should be_false
+          end
+          it "should have a class method that does not match the request" do
+            IndexCommand.matches(request).should be_false
           end
         end
       end
