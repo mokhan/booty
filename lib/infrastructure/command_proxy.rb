@@ -1,15 +1,19 @@
-  class CommandProxy
-    def initialize(command, container)
-      @command = command
-      @container = container
-    end
-    def matches(route)
-      @command.matches(route)
-    end
-    def run(request)
-      @container.build(@command).run(request)
-    end
-    def instance_of?(type)
-      @command == type
-    end
+require 'reload_file_strategy'
+
+class CommandProxy
+  def initialize(command, container, load_strategy = ReloadFileStrategy.new)
+    @command = command
+    @container = container
+    @load_strategy = load_strategy
   end
+  def matches(route)
+    @command.matches(route)
+  end
+  def run(request)
+    @load_strategy.reload(@command)
+    @container.build(@command).run(request)
+  end
+  def instance_of?(type)
+    @command == type
+  end
+end

@@ -1,9 +1,10 @@
 require "spec_helper"
 
 describe CommandProxy do
-  let(:sut) { CommandProxy.new(command, container) }
+  let(:sut) { CommandProxy.new(command, container, load_strategy) }
   let(:command) { Booty::Dashboard::IndexCommand }
   let(:container) { fake }
+  let(:load_strategy) { fake }
 
   context "when run" do
     let(:request) { fake }
@@ -16,6 +17,9 @@ describe CommandProxy do
 
     it "should build and run the command" do
       new_instance.should have_received(:run, request)
+    end
+    it "should reload the file" do
+      load_strategy.should have_received(:reload, command)
     end
   end
   context "when matching" do
