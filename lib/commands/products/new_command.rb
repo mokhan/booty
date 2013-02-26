@@ -1,11 +1,17 @@
-class Booty::Products::NewCommand < Booty::RouteCommand
-  handles :uri => /^\/products\/new$/, :method => :GET
+require 'route_command'
 
-  def initialize(view_engine)
-    @view_engine = view_engine
-  end
+module Booty
+  module Products
+    class NewCommand < Booty::RouteCommand
+      handles :uri => /^\/products\/new$/, :method => :GET
 
-  def run(request)
-    render_html(@view_engine.render(:template => '/products/new.html.erb'))
+      def initialize(view_engine)
+        @view_engine = view_engine
+      end
+
+      def run(request)
+        render_html(@view_engine.render(:template => '/products/new.html.erb'))
+      end
+    end
   end
 end
