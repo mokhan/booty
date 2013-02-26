@@ -25,6 +25,9 @@ module Booty
       it "should route to the create command" do
         command_for({ "REQUEST_PATH" => "/products", "REQUEST_METHOD" => "POST" }).should be_instance_of(Booty::Products::CreateCommand)
       end
+      it "should route to the show command" do
+        command_for({ "REQUEST_PATH" => "/products/1", "REQUEST_METHOD" => "GET" }).should be_instance_of(Booty::Products::ShowCommand)
+      end
     end
 
     it "should route to the 404 handler" do

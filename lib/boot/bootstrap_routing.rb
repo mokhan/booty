@@ -17,6 +17,7 @@ module Booty
       register(proxy_to(Products::IndexCommand))
       register(proxy_to(Products::NewCommand))
       register(proxy_to(Products::CreateCommand))
+      register(proxy_to(Products::ShowCommand))
       register(@container.build(DefaultCommand))
     end
 

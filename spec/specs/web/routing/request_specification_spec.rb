@@ -32,6 +32,7 @@ describe RequestSpecification do
   end
   context "when matching a route with an id" do
     let(:sut) { RequestSpecification.new :uri => /^\/products\/[0-9]+$/ }
+    #let(:sut) { RequestSpecification.new :uri => /^\/products\/(\d+)+$/ }
 
     it "should match when given a proper route" do
       request = { "REQUEST_PATH" => '/products/100' }
