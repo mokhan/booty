@@ -1,6 +1,9 @@
 require "rubygems"
 require "rack"
 Dir.glob("lib/**/*.rb").each { |x| $:.unshift(File.dirname(x)) }
+["infrastructure", "orm", "web"].each do |dir|
+  Dir["#{File.dirname(__FILE__)}/lib/#{dir}/**/*.rb"].each { |f| require(f) }
+end
 require 'bootstrap_container'
 require 'bootstrap_routing'
 require 'log'

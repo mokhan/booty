@@ -1,3 +1,5 @@
+require "database_command"
+
 class Commands
   def self.update_command_for(table, item)
     create_command { |connection| connection[table].update(item.attributes) }

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe Repository do
-  let(:sut) { Repository.new(Product, :products, gateway) }
+  let(:sut) { Repository.new(:products, gateway, DataMapper.new(Product)) }
   let(:gateway) { DatabaseGateway.new( DatabaseConnectionFactory.new(DatabaseConfiguration.new, SequelConnectionProvider.new)) }
 
   context "when fetching all products from the database" do

@@ -1,5 +1,3 @@
-require 'ioc'
-require 'command_proxy'
 Dir["#{File.dirname(__FILE__)}/../commands/**/*.rb"].each { |f| load(f) }
 
 module Booty

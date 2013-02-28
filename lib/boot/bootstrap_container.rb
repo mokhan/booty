@@ -1,14 +1,4 @@
-require 'container'
-require 'ioc'
-require 'front_controller'
-require 'command_registry'
-require 'view_engine'
-require 'repository'
 require 'product'
-require 'database_gateway'
-require 'database_connection_factory'
-require 'database_configuration'
-require 'sequel_connection_provider'
 
 class BootstrapContainer
   def initialize(container = Booty::Container.new)
@@ -22,7 +12,7 @@ class BootstrapContainer
       Booty::ViewEngine.new(:root_path => 'lib/commands', :master => 'master.html.erb', :model => OpenStruct.new)
     end
     @container.register(:products_repository) do
-      Repository.new(Product, :products, @container.resolve(:database_gateway))
+      Repository.new(:products, @container.resolve(:database_gateway), DataMapper.new(Product))
     end
     @container.register(:database_gateway) do
       DatabaseGateway.new(@container.resolve(:database_connection_factory))

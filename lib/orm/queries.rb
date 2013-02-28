@@ -1,3 +1,5 @@
+require 'database_query'
+
 class Queries
   def self.find_all(table)
     create_query { |c| c.from(table).all }

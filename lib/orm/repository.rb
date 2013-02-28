@@ -1,10 +1,8 @@
-require 'database_query'
-require "database_command"
 require "queries"
 require "commands"
 
 class Repository
-  def initialize(clazz, table, database_gateway, data_mapper = DataMapper.new(clazz))
+  def initialize(table, database_gateway, data_mapper)
     @table = table
     @database_gateway = database_gateway
     @data_mapper = data_mapper
