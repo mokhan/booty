@@ -1,16 +1,15 @@
 require 'database_query'
 require "database_command"
-class Array
-  def map_all_using(mapper)
-    map { |item| mapper.map_from(item) }
+
+class Queries
+  def self.find_all(table)
+    create_query { |c| c.from(table).all }
   end
-end
-class DataMapper
-  def initialize(clazz)
-    @clazz = clazz
-  end
-  def map_from(row)
-    @clazz.new(row)
+
+  private
+
+  def self.create_query
+    DatabaseQuery.new { |connection| yield(connection) }
   end
 end
 
@@ -22,15 +21,15 @@ class Repository
   end
 
   def find_by(id)
-    @data_mapper.map_from(@database_gateway.run(create_query { |c| c.from(@table).where(:id => id).first }))
+    run(create_query { |c| c.from(@table).where(:id => id).first }).map_using(@data_mapper)
   end
 
   def find_all
-    @database_gateway.run(create_query { |c| c.from(@table).all }).map_all_using(@data_mapper)
+    run(Queries.find_all(@table)).map_all_using(@data_mapper)
   end
 
   def save(item)
-    @database_gateway.run(create_save_command_for(item))
+    run(create_save_command_for(item))
   end
 
   private
@@ -51,4 +50,9 @@ class Repository
   def create_query
     DatabaseQuery.new { |connection| yield(connection) }
   end
+
+  def run(command)
+    @database_gateway.run(command)
+  end
+
 end
