@@ -21,6 +21,10 @@ class Repository
     @data_mapper = data_mapper
   end
 
+  def find_by(id)
+    @data_mapper.map_from(@database_gateway.run(create_query { |c| c.from(@table).where(:id => id).first }))
+  end
+
   def find_all
     @database_gateway.run(create_query { |c| c.from(@table).all }).map_all_using(@data_mapper)
   end

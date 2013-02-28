@@ -58,4 +58,21 @@ describe Repository do
       found[:name].should == 'bar'
     end
   end
+  context "when fetching an item by its id" do
+    context "when the id exists" do
+      before :each do
+        @id = TestDatabaseGateway.connection.from(:products).insert(:name => 'blah')
+      end
+
+      let(:result) { sut.find_by(@id) }
+
+      it "should return the item" do
+        result.should == Product.new(:id => @id, :name => 'blah')
+      end
+
+      after :each do
+        TestDatabaseGateway.connection.from(:products).delete
+      end
+    end
+  end
 end
