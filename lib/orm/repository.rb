@@ -1,17 +1,6 @@
 require 'database_query'
 require "database_command"
-
-class Queries
-  def self.find_all(table)
-    create_query { |c| c.from(table).all }
-  end
-
-  private
-
-  def self.create_query
-    DatabaseQuery.new { |connection| yield(connection) }
-  end
-end
+require "queries"
 
 class Repository
   def initialize(clazz, table, database_gateway, data_mapper = DataMapper.new(clazz))
@@ -21,7 +10,7 @@ class Repository
   end
 
   def find_by(id)
-    run(create_query { |c| c.from(@table).where(:id => id).first }).map_using(@data_mapper)
+    run(Queries.find_single(@table,{ :id => id })).map_using(@data_mapper)
   end
 
   def find_all
