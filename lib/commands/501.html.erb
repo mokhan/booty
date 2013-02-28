@@ -1,7 +1,8 @@
-<h1>Ooops... <%= self.class %></h1>
-<h2><%= self.message %></h2>
+<%= self.title = "Ooops" %>
+<h1>Ooops... <%= self.error.class %></h1>
+<h2><%= self.error.message %></h2>
 <ul>
-<% self.backtrace.each do |line| %>
+<% self.error.backtrace.each do |line| %>
   <li><%= line %></li>
 <% end %>
 </ul>

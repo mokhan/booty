@@ -11,7 +11,7 @@ module Booty
         @command_registry.command_for(env).run(env)
       rescue => e
         p e
-        [501, {"Content-Type" => "text/html"}, [@view_engine.render(:template => '501.html.erb', :model => e)]]
+        [501, {"Content-Type" => "text/html"}, [@view_engine.render(:template => '501.html.erb', :model => OpenStruct.new(:error => e))]]
       end
     end
   end

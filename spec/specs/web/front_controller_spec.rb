@@ -33,11 +33,9 @@ module Booty
       let(:env) { {} }
       let(:html) { "<html></html>" }
       before :each do
-        #command_registry.stub(:command_for).and_throw(error)
         def command_registry.command_for(item)
           raise error
         end
-        #view_engine.stub(:render).with(:template => '501.html.erb', :model => error).and_return(html)
         view_engine.stub(:render).and_return(html)
       end
       before :each do
