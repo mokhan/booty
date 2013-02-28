@@ -1,4 +1,3 @@
-
 module Booty
   module Products
     class ShowCommand < RouteCommand
@@ -9,8 +8,9 @@ module Booty
         @repository  = products_repository
       end
 
-      def run(request)
-        product = @repository.find_by(2)
+      def respond_to(request)
+        id = request.path.match(/.*\/(\d+)+$/)[1].to_i
+        product = @repository.find_by(id)
         html = @view_engine.render({:template => '/products/show.html.erb', :model => OpenStruct.new(:product => product)})
         [200, {"Content-Type" => 'text/html'}, [html]]
       end
