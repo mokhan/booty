@@ -1,6 +1,7 @@
 require 'database_query'
 require "database_command"
 require "queries"
+require "commands"
 
 class Repository
   def initialize(clazz, table, database_gateway, data_mapper = DataMapper.new(clazz))
@@ -24,20 +25,8 @@ class Repository
   private
 
   def create_save_command_for(item)
-    return create_command { |connection| connection[@table].update(item.attributes) } if item.id > 0
-
-    create_command do |connection|
-      id = connection[@table].insert(item.attributes.delete_if {|key, value| key == :id })
-      item.instance_variable_set(:@id, id)
-    end
-  end
-
-  def create_command
-    DatabaseCommand.new { |connection| yield(connection) }
-  end
-
-  def create_query
-    DatabaseQuery.new { |connection| yield(connection) }
+    return Commands.update_command_for(@table, item) if item.id > 0
+    Commands.insert_command_for(@table, item)
   end
 
   def run(command)
