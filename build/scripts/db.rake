@@ -22,13 +22,16 @@ end
 class Database
   def create(environment)
     configuration = load_configuration_for(environment)
-    sh "psql -c 'CREATE DATABASE #{configuration['database']} WITH OWNER #{configuration['username']} '"
+    database = configuration['database']
+    username = configuration['username']
+    sh "psql -c 'CREATE DATABASE #{database} WITH OWNER #{username} '"
+    sh "psql -c 'GRANT ALL PRIVILEGES ON DATABASE #{database} TO #{username}'"
   end
 
   def migrate(environment)
     configuration = load_configuration_for(environment)
     connection_string = "postgres://#{configuration["host"]}/#{configuration["database"]}"
-    sh "sequel -m db/migrations -E #{connection_string}"
+    sh "sequel -m build/db/migrations -E #{connection_string}"
   end
 
   private

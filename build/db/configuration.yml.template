@@ -2,12 +2,12 @@ development:
   adapter: postgresql
   database: booty_development
   host: localhost
-  username: booty
-  password: password
+  username: mo
+  password:
 
 test:
   adapter: postgresql
   database: booty_test
   host: localhost
-  username: booty
-  password: password
+  username: mo
+  password:
