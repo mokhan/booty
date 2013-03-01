@@ -16,9 +16,9 @@ module Booty
       BootstrapRouting.new.run
       logger.debug("starting up http://localhost:9292")
 
-      Rack::Handler::Mongrel.run IOC.resolve(:front_controller), :Port => 9292
+      IOC.resolve(:front_controller)
     end
   end
 end
 
-Booty::Application.run
+run Booty::Application.run
