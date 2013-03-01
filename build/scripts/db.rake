@@ -32,8 +32,7 @@ class Database
   end
 
   def migrate(environment)
-    configuration = load_configuration_for(environment)
-    connection_string = "postgres://#{configuration["host"]}/#{configuration["database"]}"
+    connection_string = ENV["DATABASE_URL"] || create_connection_string_for(environment)
     sh "sequel -m build/db/migrations -E #{connection_string}"
   end
 
@@ -44,8 +43,13 @@ class Database
   end
 
   def load_configuration_for(environment)
-    all_configuration = YAML.load_file(File.expand_path(File.join(File.dirname(__FILE__), '../db/configuration.yml')))
+    all_configuration = YAML.load_file(File.join(File.dirname(__FILE__), '../db/configuration.yml'))
     all_configuration[ENV["BOOTY_ENV"] || environment]
+  end
+
+  def create_connection_string_for(environment)
+    configuration = load_configuration_for(environment)
+    "postgres://#{configuration["host"]}/#{configuration["database"]}"
   end
 end
 
