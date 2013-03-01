@@ -44,7 +44,7 @@ class Database
   end
 
   def load_configuration_for(environment)
-    all_configuration = YAML.load_file(File.join(File.dirname(__FILE__), '../db/configuration.yml'))
+    all_configuration = YAML.load_file(File.expand_path(File.join(File.dirname(__FILE__), '../db/configuration.yml')))
     all_configuration[ENV["BOOTY_ENV"] || environment]
   end
 end
