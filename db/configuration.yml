@@ -11,10 +11,3 @@ test:
   host: localhost
   username: booty
   password: password
-
-production:
-  adapter: postgresql
-  database: booty_production
-  host: localhost
-  username: booty
-  password: password
