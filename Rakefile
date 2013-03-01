@@ -1,5 +1,18 @@
 require 'yaml'
 
+task :default => :spec
+task :spec => 'spec:all'
+task :run => 'run:development'
+
+namespace :run do
+  task :development do 
+    sh 'BOOTY_ENV=development rackup'
+  end
+  task :test do 
+    sh 'BOOTY_ENV=test rackup'
+  end
+end
+
 namespace :generate do
   task :migration, :title do |t, args|
     filename = "db/migrations/#{Time.now.strftime('%Y%m%d%H%M%S%L')}_#{args.title}.rb"
@@ -35,5 +48,3 @@ namespace :spec do
     sh 'rspec spec/acceptance'
   end
 end
-task :spec => 'spec:all'
-task :default => :spec
