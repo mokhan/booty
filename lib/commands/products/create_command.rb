@@ -1,17 +1,23 @@
-class Booty::Products::CreateCommand < Booty::RouteCommand
-  handles :uri => /\/products$/, :method => :POST
+require 'product'
 
-  def initialize(products_repository)
-    @repository = products_repository
-  end
+module Booty
+  module Products
+    class CreateCommand < Booty::RouteCommand
+      handles :uri => /\/products$/, :method => :POST
 
-  def respond_to(request)
-    @repository.save(map_from(request.payload))
-    [301, {"Location" => '/products'}, []]
-  end
+      def initialize(products_repository)
+        @repository = products_repository
+      end
 
-  private 
-  def map_from(payload)
-    Product.new(payload[:product])
+      def respond_to(request)
+        @repository.save(map_from(request.payload))
+        [301, {"Location" => '/products'}, []]
+      end
+
+      private 
+      def map_from(payload)
+        Product.new(payload[:product])
+      end
+    end
   end
 end
