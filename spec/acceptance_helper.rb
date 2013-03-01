@@ -29,7 +29,7 @@ class BackgroundJob
 end
 RSpec.configure do |config|
   jobs = []
-  jobs.push(BackgroundJob.new('rackup'))
+  jobs.push(BackgroundJob.new('rake run:test'))
 
   config.before(:suite) do
     jobs.each { |job| job.start }
