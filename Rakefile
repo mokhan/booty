@@ -1,5 +1,5 @@
 require 'yaml'
-Dir.glob('script/**/*.rake').each { |r| import r }
+Dir.glob('build/**/*.rake').each { |r| import r }
 
 task :default => :spec
 task :spec => 'spec:all'

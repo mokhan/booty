@@ -16,7 +16,7 @@ describe DatabaseConfiguration do
     end
 
     def load_all_configuration
-      YAML.load_file(File.join(File.dirname(__FILE__),'../../../db/configuration.yml'))
+      YAML.load_file(File.join(File.dirname(__FILE__),'../../../build/db/configuration.yml'))
     end
 
     def build_connection_string
