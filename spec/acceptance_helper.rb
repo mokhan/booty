@@ -29,7 +29,7 @@ class BackgroundJob
 end
 RSpec.configure do |config|
   jobs = []
-  jobs.push(BackgroundJob.new('rake run:test'))
+  jobs.push(BackgroundJob.new('bundle exec rackup config.ru -p 9292 -s mongrel'))
 
   config.before(:suite) do
     jobs.each { |job| job.start }
