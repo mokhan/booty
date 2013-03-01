@@ -3,6 +3,7 @@ require 'yaml'
 task :default => :spec
 task :spec => 'spec:all'
 task :run => 'run:development'
+task :ci => ['spec:unit', 'spec:integration']
 
 namespace :run do
   task :development do 
