@@ -1,6 +1,5 @@
 require 'erb'
 require 'ostruct'
-require 'expose_binding_behaviour'
 
 module Booty
   class DefaultCommand

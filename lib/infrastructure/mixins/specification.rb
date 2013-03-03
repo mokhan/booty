@@ -1,5 +1,3 @@
-require "block_specification"
-
 module Booty
   module Specification
     def or(other_predicate = nil, &block)
@@ -19,7 +17,7 @@ module Booty
     private
 
     def create_predicate(predicate = nil, &block)
-      block_given? ? BlockSpecification.new(&block) : predicate
+      block_given? ? Booty::BlockSpecification.new(&block) : predicate
     end
   end
 end

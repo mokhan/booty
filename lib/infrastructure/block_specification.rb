@@ -2,7 +2,7 @@ require 'specification'
 
 module Booty
   class BlockSpecification
-    include Specification
+    include Booty::Specification
 
     def initialize(&block)
       @block = block

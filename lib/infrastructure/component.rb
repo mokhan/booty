@@ -1,4 +1,4 @@
-require 'lambda_behaviours'
+#require 'lambda_behaviours'
 
 module Booty
   class Component

@@ -1,5 +1,3 @@
-require "http_command_behaviour"
-
 module Booty
   class FrontController
     def initialize(command_registry, view_engine)
