@@ -1,4 +1,9 @@
 require "spec_helper"
+RSpec::Matchers.define :route_to do |expected|
+  match do |actual|
+    actual.instance_of? expected
+  end
+end
 
 module Booty
   describe "routing" do
@@ -12,38 +17,38 @@ module Booty
 
     context "dashboard" do
       it "should route to the dashboard" do
-        route_for({ :path => "/", :method => :GET }).should be_instance_of(Booty::Dashboard::IndexCommand)
+        request_to({ :path => "/", :method => :GET }).should route_to(Booty::Dashboard::IndexCommand)
       end
     end
     context "products" do
       it "should route to the index" do
-        route_for({ :path => "/products", :method => :GET }).should be_instance_of(Booty::Products::IndexCommand)
+        request_to({ :path => "/products", :method => :GET }).should route_to(Booty::Products::IndexCommand)
       end
       it "should route to the new page" do
-        route_for({ :path => "/products/new", :method => :GET }).should be_instance_of(Booty::Products::NewCommand)
+        request_to({ :path => "/products/new", :method => :GET }).should route_to(Booty::Products::NewCommand)
       end
       it "should route to the create command" do
-        route_for({ :path => "/products", :method => :POST }).should be_instance_of(Booty::Products::CreateCommand)
+        request_to({ :path => "/products", :method => :POST }).should route_to(Booty::Products::CreateCommand)
       end
       it "should route to the show command" do
-        route_for({ :path => "/products/1", :method => :GET }).should be_instance_of(Booty::Products::ShowCommand)
+        request_to({ :path => "/products/1", :method => :GET }).should route_to(Booty::Products::ShowCommand)
       end
     end
     context "sessions" do
       it "should route to the new page" do
-        route_for({ :path => "/sessions/new", :method => :GET}).should be_instance_of(Booty::Sessions::NewCommand)
+        request_to({ :path => "/sessions/new", :method => :GET}).should route_to(Booty::Sessions::NewCommand)
       end
     end
 
     it "should route to the 404 handler" do
-      route_for({ :path => "/blah/blah" }).should be_instance_of(Booty::DefaultCommand)
+      request_to({ :path => "/blah/blah" }).should route_to(Booty::DefaultCommand)
     end
 
     def command_for(request)
       registry.command_for(request).command
     end
 
-    def route_for(options)
+    def request_to(options)
       command_for( { "REQUEST_PATH" => options[:path], "REQUEST_METHOD" => options[:method].to_s })
     end
   end
