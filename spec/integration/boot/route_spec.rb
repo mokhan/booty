@@ -29,6 +29,11 @@ module Booty
         command_for({ "REQUEST_PATH" => "/products/1", "REQUEST_METHOD" => "GET" }).should be_instance_of(Booty::Products::ShowCommand)
       end
     end
+    context "sessions" do
+      it "should route to the new page" do
+        command_for({ "REQUEST_PATH" => "/sessions/new", "REQUEST_METHOD" => "GET"}).should be_instance_of(Booty::Sessions::NewCommand)
+      end
+    end
 
     it "should route to the 404 handler" do
       command_for({ "REQUEST_PATH" => "/blah/blah" }).should be_instance_of(Booty::DefaultCommand)
