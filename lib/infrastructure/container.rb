@@ -7,15 +7,15 @@ module Booty
       register(:container) { self }
     end
     def register(key, &block)
-      component = Component.new(&block)
-      coponents_for(key).push(component)
+      component = Component.new(key, &block)
+      components_for(key).push(component)
       component
     end
     def resolve(key)
-      instantiate(coponents_for(key).first)
+      instantiate(components_for(key).first)
     end
     def resolve_all(key)
-      coponents_for(key).map {|item| instantiate(item) }
+      components_for(key).map {|item| instantiate(item) }
     end
     def build(type)
       try("I could not create: #{type}"){ build!(type) }
@@ -31,7 +31,7 @@ module Booty
 
     private
 
-    def coponents_for(key)
+    def components_for(key)
       @items[key] = [] unless @items[key]
       @items[key]
     end

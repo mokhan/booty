@@ -94,5 +94,38 @@ module Booty
         end
       end
     end
+    context "when registering an interceptor" do
+      class TestInterceptor
+        attr_reader :called
+        def intercept(invocation)
+          @called = true
+          p "INTERCEPTION"
+          invocation.call
+        end
+      end
+      class TestCommand
+        attr_reader :called
+        def run(input)
+          @called = true
+          p "CAUGHT #{input}"
+        end
+      end
+      let(:command) { TestCommand.new }
+      let(:interceptor) { TestInterceptor.new }
+
+      before :each do
+        sut.register(:command) { command }.intercept(:run).with(interceptor)
+        sut.resolve(:command).run("hi")
+      end
+
+      it "should allow the interceptor to intercept calls to the target" do
+        interceptor.called.should be_true
+      end
+
+      it "should forward the args to the command" do
+        #command.should have_received(:run, 'hi')
+        command.called.should be_true
+      end
+    end
   end
 end

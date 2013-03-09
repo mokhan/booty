@@ -1,5 +1,5 @@
-#require 'routed_command'
-#require 'block_specification'
+require 'routed_command'
+require 'block_specification'
 
 module Booty
   class CommandRegistry

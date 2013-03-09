@@ -11,4 +11,12 @@ class UnitOfWork
     @context.remove(@key)
     @session.dispose
   end
+  def self.create(factory, &block)
+    unit_of_work = factory.create
+    begin
+      block.call
+    rescue
+      unit_of_work.dispose
+    end
+  end
 end
