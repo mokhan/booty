@@ -97,17 +97,16 @@ module Booty
     context "when registering an interceptor" do
       class TestInterceptor
         attr_reader :called
-        def intercept(invocation)
+        def intercept(invocation, args)
           @called = true
-          p "INTERCEPTION"
-          invocation.call
+          invocation.call(args)
         end
       end
       class TestCommand
-        attr_reader :called
+        attr_reader :called, :received
         def run(input)
           @called = true
-          p "CAUGHT #{input}"
+          @received = input
         end
       end
       let(:command) { TestCommand.new }
@@ -125,6 +124,7 @@ module Booty
       it "should forward the args to the command" do
         #command.should have_received(:run, 'hi')
         command.called.should be_true
+        command.received.should == ['hi']
       end
     end
   end

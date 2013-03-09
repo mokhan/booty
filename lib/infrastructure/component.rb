@@ -45,13 +45,13 @@ module Booty
       @instance = instance
     end
     def add(method, interceptor)
-      self.class.define_method(method.to_sym) do |input|
-        interceptor.intercept(create_call_for(method))
+      self.class.define_method(method.to_sym) do |*args|
+        interceptor.intercept(create_call_for(method), args)
       end
     end
     def create_call_for(method)
       instance = @instance
-      lambda do |*args|
+      lambda do |args|
         instance.send(method, args) 
       end
     end
