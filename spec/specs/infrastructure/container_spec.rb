@@ -97,9 +97,9 @@ module Booty
     context "when registering an interceptor" do
       class TestInterceptor
         attr_reader :called
-        def intercept(invocation, args)
+        def intercept(invocation)
           @called = true
-          invocation.call(args)
+          invocation.proceed
         end
       end
       class TestCommand
