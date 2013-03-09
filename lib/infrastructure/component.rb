@@ -12,7 +12,7 @@ module Booty
     def create(container)
       instance = @factory_method.call(container)
       @interceptors.each do |interceptor|
-        interceptor.intercept(instance)
+        instance = interceptor.intercept(instance)
       end
       instance
     end
@@ -22,12 +22,12 @@ module Booty
     end
 
     def intercept(method)
-      interceptor = Interceptor.new(method)
+      interceptor = InterceptorRegistration.new(method)
       @interceptors.push(interceptor)
       interceptor
     end
   end
-  class Interceptor
+  class InterceptorRegistration
     def initialize(method_symbol)
       @method = method_symbol
     end
@@ -35,17 +35,25 @@ module Booty
       @interceptor = interceptor
     end
     def intercept(instance)
-      v = @interceptor
-      instance.class.send(:define_method, @method.to_sym) do |input|
-        p "WHAT THA"
-        v.intercept(lambda do |*args| 
-          p "invoke the original"
-          #instance.send(@method, args) 
-        end)
+      proxy= Proxy.new(instance)
+      proxy.add(@method, @interceptor)
+      proxy
+    end
+  end
+  class Proxy
+    def initialize(instance)
+      @instance = instance
+    end
+    def add(method, interceptor)
+      self.class.define_method(method.to_sym) do |input|
+        interceptor.intercept(create_call_for(method))
       end
-      #instance.define_method(@method) do |*args|
-        #@interceptor.intercept(lambda { |*args| instance.send(@method, args) })
-      #end
+    end
+    def create_call_for(method)
+      instance = @instance
+      lambda do |*args|
+        instance.send(method, args) 
+      end
     end
   end
 end
