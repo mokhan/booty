@@ -4,7 +4,7 @@ class UnitOfWorkInterceptor
   end
   def intercept(invocation)
     UnitOfWork.create(@unit_of_work_factory) do |unit_of_work|
-      invocation.call
+      invocation.proceed
       unit_of_work.commit
     end
   end
