@@ -1,27 +1,33 @@
 require "spec_helper"
 
 describe UnitOfWorkFactory do
-  let(:sut) { UnitOfWorkFactory.new(context, session_factory, key) }
-  let(:context) { fake }
+  let(:sut) { UnitOfWorkFactory.new(application_context, session_factory, key) }
+  let(:application_context) { fake }
   let(:session_factory) { fake }
-  let(:key) { fake }
+  let(:key) { "blah" }
 
   context "when creating a new unit of work" do
-    let(:session) { fake }
-    before :each do
-      session_factory.stub(:create).and_return(session)
-    end
-    let(:result) { sut.create }
+    let(:session) { "session" }
+    before { session_factory.stub(:create).and_return(session) }
 
     context "when there is no running session" do
-      before { context.stub(:contains?).with(key).and_return(false) }
+      before { application_context.stub(:contains?).with(key).and_return(false) }
 
-      it "should return a new instance" do
+      let!(:result) { sut.create }
+
+      it "should start a new unit of work" do
         result.should be_instance_of(UnitOfWork)
       end
+
+      it "should mark the unit of work as started" do
+        application_context.should have_received(:add, key, session)
+      end
     end
+
     context "when there is a running session" do
-      before { context.stub(:contains?).with(key).and_return(true) }
+      before { application_context.stub(:contains?).with(key).and_return(true) }
+
+      let(:result) { sut.create }
 
       it "should return an empty unit of work" do
         result.should be_instance_of(NullUnitOfWork)
