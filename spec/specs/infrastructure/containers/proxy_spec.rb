@@ -6,9 +6,8 @@ module Booty
     let(:target) { fake }
 
     context "when invoking a method" do
-      before :each do
-        sut.greet('blah')
-      end
+      before { sut.greet('blah') }
+
       it "should send the message to the target" do
         target.should have_received(:greet, 'blah')
       end
@@ -19,12 +18,18 @@ module Booty
         let(:interceptor) { fake }
 
         before :each do
-          sut.add(:greet, interceptor)
+          sut.add_interceptor(:greet, interceptor)
           sut.greet("blah")
         end
         it "should allow the interceptor to intercept the call" do
           interceptor.should have_received(:intercept)
         end
+      end
+    end
+
+    context "when invoking a method that is not defined on the target" do
+      it "should raise an error" do
+        expect { Proxy.new("blah").goodbye }.to raise_error
       end
     end
   end
