@@ -25,6 +25,16 @@ module Booty
           interceptor.should have_received(:intercept)
         end
       end
+      context "when invoking a method with a block" do
+        it "should pass the block to the target" do
+          proxy = Proxy.new([])
+          expect do
+            proxy.each do |x|
+              raise StandardError
+            end
+          end.to raise_error
+        end
+      end
     end
 
     context "when invoking a method that is not defined on the target" do
