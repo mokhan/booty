@@ -1,8 +1,8 @@
 module Booty
   class HtmlResponse
-    def initialize(options)
-      @template = options[:template]
-      @model = options[:model]
+    def initialize(template: '', model: nil)
+      @template = template
+      @model = model
     end
 
     def run(view_engine)
