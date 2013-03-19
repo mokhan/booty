@@ -5,7 +5,7 @@ module Booty
       @model = options[:model]
     end
 
-    def run(view_engine = nil)
+    def run(view_engine)
       html = render_html_using(view_engine)
       [200, {"Content-Type" => "text/html"}, [html]]
     end
@@ -13,11 +13,8 @@ module Booty
     private
 
     def render_html_using(view_engine)
-      if @model
-        view_engine.render(:template => @template, :model => @model)
-      else
-        view_engine.render(:template => @template)
-      end
+      return view_engine.render(:template => @template, :model => @model) if @model
+      view_engine.render(:template => @template)
     end
   end
 end
