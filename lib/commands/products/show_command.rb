@@ -11,8 +11,7 @@ module Booty
       def respond_to(request)
         id = request.path.match(/.*\/(\d+)+$/)[1].to_i
         product = @repository.find_by(id)
-        html = @view_engine.render({:template => '/products/show.html.erb', :model => OpenStruct.new(:product => product)})
-        [200, {"Content-Type" => 'text/html'}, [html]]
+        HtmlResponse.new(:template => "/products/show.html.erb", :model => OpenStruct.new(:product => product)).run(@view_engine)
       end
     end
   end

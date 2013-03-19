@@ -1,7 +1,6 @@
 module Booty
   class HtmlResponse
     def initialize(options)
-      @html = options[:content]
       @template = options[:template]
       @model = options[:model]
     end
@@ -15,9 +14,9 @@ module Booty
 
     def render_html_using(view_engine)
       if @model
-        @html || view_engine.render(:template => @template, :model => @model)
+        view_engine.render(:template => @template, :model => @model)
       else
-        @html || view_engine.render(:template => @template)
+        view_engine.render(:template => @template)
       end
     end
   end
