@@ -7,7 +7,8 @@ module Booty
         @view_engine = view_engine
       end
       def run(request)
-        render_html(@view_engine.render(:template => '/sessions/new.html.erb'))
+        html = @view_engine.render(:template => '/sessions/new.html.erb')
+        HtmlResponse.new(:content => html).run
       end
     end
   end

@@ -10,7 +10,8 @@ module Booty
         @repository = products_repository
       end
       def run(request)
-        render_html(@view_engine.render(:template => "/products/index.html.erb", :model => OpenStruct.new(:items => @repository.find_all)))
+        html = @view_engine.render(:template => "/products/index.html.erb", :model => OpenStruct.new(:items => @repository.find_all))
+        HtmlResponse.new(:content => html).run
       end
     end
   end

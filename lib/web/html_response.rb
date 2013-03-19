@@ -1,11 +1,11 @@
-module Booty  
+module Booty
   class HtmlResponse
     def initialize(options)
-      @options = options
+      @html = options[:content]
     end
 
     def run
-      [@options[:status], {"Content-Type" => @options[:content_type]}, [@options[:content]]]
+      [200, {"Content-Type" => "text/html"}, [@html]]
     end
   end
 end

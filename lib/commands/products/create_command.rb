@@ -11,7 +11,7 @@ module Booty
 
       def respond_to(request)
         @repository.save(map_from(request.payload))
-        [301, {"Location" => '/products'}, []]
+        RedirectResponse.new(:location => '/products').run
       end
 
       private 

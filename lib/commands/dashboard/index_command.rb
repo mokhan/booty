@@ -8,8 +8,10 @@ module Booty
       def initialize(view_engine)
         @view_engine = view_engine
       end
+
       def run(request)
-        render_html(@view_engine.render(:template => "/dashboard/index.html.erb"))
+        html= @view_engine.render(:template => "/dashboard/index.html.erb")
+        HtmlResponse.new(:content => html).run
       end
     end
   end
