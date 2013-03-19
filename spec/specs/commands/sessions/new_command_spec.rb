@@ -13,7 +13,7 @@ describe Booty::Sessions::NewCommand do
     let(:result) { sut.run(request) }
 
     it "should render the correct view" do
-      result.should == [200, "Content-Type" => "text/html" [ html ]]
+      result.should == [200, { "Content-Type" => "text/html" }, [ html ]]
     end
   end
 end
