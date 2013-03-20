@@ -11,7 +11,7 @@ module Booty
 
       def respond_to(request)
         @repository.save(map_from(request.payload))
-        RedirectResponse.new(:location => '/products').run
+        RedirectResponse.new(:location => '/products')
       end
 
       private 

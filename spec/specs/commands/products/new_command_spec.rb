@@ -8,11 +8,15 @@ describe Booty::Products::NewCommand do
     let(:html) { DateTime.now.to_s }
 
     before :each do
-      view_engine.stub(:render).with({:template => '/products/new.html.erb'}).and_return(html)
       @result = sut.run({})
     end
-    it "should render the proper view" do
-      @result.should == [200, {"Content-Type" => "text/html"}, [html]]
+
+    it "should return the proper status" do
+      @result.status.should == 200
+    end
+
+    it "should return the proper template" do
+      @result.template.should == '/products/new.html.erb'
     end
   end
 end

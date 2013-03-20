@@ -27,15 +27,23 @@ module Booty::Assets
     context "when serving a static asset" do
       it "should serve javascript resources" do
         result = sut.run( { "REQUEST_PATH" => "/assets/js/bootstrap.js" } )
-        result.should == [200, {"Content-Type" => "text/javascript"}, [File.read('assets/js/bootstrap.js')]]
+        result.status.should == 200
+        result.content_type.should == "text/javascript"
+        result.file_path.should == "/assets/js/bootstrap.js"
       end
+
       it "should serve css resources" do
         result = sut.run( { "REQUEST_PATH" => "/assets/css/bootstrap.css" } )
-        result.should == [200, {"Content-Type" => "text/css"}, [File.read('assets/css/bootstrap.css')]]
+        result.status.should == 200
+        result.content_type.should == "text/css"
+        result.file_path.should == '/assets/css/bootstrap.css'
       end
+
       it "should serve image resources" do
         result = sut.run( { "REQUEST_PATH" => "/assets/img/glyphicons-halflings.png" } )
-        result.should == [200, {"Content-Type" => "image/png"}, [File.read('assets/img/glyphicons-halflings.png')]]
+        result.status.should == 200
+        result.content_type.should == "image/png"
+        result.file_path.should == '/assets/img/glyphicons-halflings.png'
       end
     end
   end

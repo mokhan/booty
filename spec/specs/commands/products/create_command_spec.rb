@@ -20,7 +20,8 @@ describe Booty::Products::CreateCommand do
     end
 
     it "should redirect to the product listing" do
-      @result.should == [301, {"Location" => '/products'}, []]
+      @result.status.should == 301
+      @result.location.should == '/products'
     end
   end
 end

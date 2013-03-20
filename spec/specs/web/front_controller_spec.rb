@@ -9,11 +9,13 @@ module Booty
     context "when a new request is received" do
       let(:correct_command) { fake }
       let(:incorrect_command) { fake }
+      let(:template_result) { fake }
       let(:response) { [] }
       let(:env) { {} }
       before(:each) do
         command_registry.stub(:command_for).with(env).and_return(correct_command)
-        correct_command.stub(:run).and_return(response)
+        correct_command.stub(:run).and_return(template_result)
+        template_result.stub(:run).with(view_engine).and_return(response)
       end
       before(:each) do
         @result = sut.call(env)

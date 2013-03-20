@@ -10,7 +10,7 @@ module Booty
       true
     end
     def run(request)
-      [404, {"Content-Type" => "text/html"}, [@view_engine.render(:template => "/404.html.erb")]]
+      HtmlResponse.new(:template => "/404.html.erb", :status => 404)
     end
   end
 end

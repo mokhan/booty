@@ -4,8 +4,8 @@ module Booty
       def matches(request)
         request["REQUEST_PATH"].include?(".css")
       end
-      def run(content)
-        [200, {"Content-Type" => "text/css"}, [content]]
+      def run(resource)
+        AssetResponse.new(200, resource, "text/css")
       end
     end
   end

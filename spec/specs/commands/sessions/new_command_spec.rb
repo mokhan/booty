@@ -7,13 +7,14 @@ describe Booty::Sessions::NewCommand do
   context "when viewed" do
     let(:html) { "<html/>" }
     let(:request) { {} }
-    before :each do
-      view_engine.stub(:render).with({:template => '/sessions/new.html.erb'}).and_return(html)
-    end
     let(:result) { sut.run(request) }
 
-    it "should render the correct view" do
-      result.should == [200, { "Content-Type" => "text/html" }, [ html ]]
+    it "should return the correct status" do
+      result.status.should == 200
+    end
+
+    it "should render the correct template" do
+      result.template.should == '/sessions/new.html.erb'
     end
   end
 end

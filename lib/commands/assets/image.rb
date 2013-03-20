@@ -4,8 +4,8 @@ module Booty
       def matches(request)
         request["REQUEST_PATH"].include?(".png")
       end
-      def run(content)
-        [200, {"Content-Type" => "image/png"}, [content]]
+      def run(resource)
+        AssetResponse.new(200, resource, "image/png")
       end
     end
   end

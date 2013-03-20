@@ -1,13 +1,16 @@
 module Booty
   class HtmlResponse
-    def initialize(template: '', model: nil)
+    attr_reader :template, :model, :status
+
+    def initialize(template: '', model: nil, status: 200)
       @template = template
       @model = model
+      @status = status
     end
 
     def run(view_engine)
       html = render_html_using(view_engine)
-      [200, {"Content-Type" => "text/html"}, [html]]
+      [@status, {"Content-Type" => "text/html"}, [html]]
     end
 
     private

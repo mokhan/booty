@@ -13,7 +13,7 @@ module Booty
       end
       def run(request)
         asset = @assets.find { |a| a.matches(request) }
-        asset.run(File.read(File.join(Dir.pwd, request["REQUEST_PATH"])))
+        asset.run(request["REQUEST_PATH"])
       end
     end
   end

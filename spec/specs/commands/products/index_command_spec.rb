@@ -12,14 +12,23 @@ module Booty
         let(:products) { [fake] }
 
         before :each do
-          view_engine.stub(:render).with({:template => '/products/index.html.erb', :model => OpenStruct.new(:items => products)}).and_return(html)
           repository.stub(:find_all).and_return(products)
         end
+
         before :each do
           @result = sut.run({})
         end
-        it "should display each product" do
-          @result.should == [200, {"Content-Type" => "text/html"}, [html]]
+
+        it "should return the proper status" do
+          @result.status.should == 200
+        end
+
+        it "should return the proper model" do
+          @result.model.should == products
+        end
+
+        it "should render the proper view" do
+          @result.template.should == '/products/index.html.erb'
         end
       end
     end

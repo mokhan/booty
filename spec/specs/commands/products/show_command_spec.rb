@@ -14,13 +14,20 @@ describe Booty::Products::ShowCommand do
     before :each do
       request.stub(:path).and_return("/products/#{id}")
       repository.stub(:find_by).with(id).and_return(product)
-      view_engine.stub(:render).with({:template => '/products/show.html.erb', :model => OpenStruct.new(:product => product)}).and_return(html)
     end
 
     let(:result) { sut.respond_to(request) }
 
-    it "should display the details" do
-      result.should == [200, {"Content-Type" => 'text/html'}, [html]]
+    it "should return the proper status" do
+      result.status.should == 200
+    end
+
+    it "should return the proper model" do
+      result.model.should == product
+    end
+
+    it "should render the correct view" do
+      result.template.should == '/products/show.html.erb'
     end
   end
 end

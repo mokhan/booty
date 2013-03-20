@@ -4,8 +4,8 @@ module Booty
       def matches(request)
         request["REQUEST_PATH"].include?(".js")
       end
-      def run(content)
-        [200, {"Content-Type" => "text/javascript"}, [content]]
+      def run(resource)
+        AssetResponse.new(200, resource, "text/javascript")
       end
     end
   end
