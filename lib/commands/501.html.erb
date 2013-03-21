@@ -1,8 +1,8 @@
 <%= self.title = "Ooops" %>
-<h1>Ooops... <%= self.error.class %></h1>
-<h2><%= self.error.message %></h2>
+<h1>Ooops... <%= self.model.class %></h1>
+<h2><%= self.model.message %></h2>
 <ul>
-<% self.error.backtrace.each do |line| %>
+<% self.model.backtrace.each do |line| %>
   <li><%= line %></li>
 <% end %>
 </ul>

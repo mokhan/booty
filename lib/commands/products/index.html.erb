@@ -34,7 +34,7 @@
         </tr>
       </thead>
       <tbody>
-      <% self.items.each do |item| %>
+      <% self.model.each do |item| %>
         <tr>
           <td><%= item.id %></td>
           <td><a href="/products/<%= item.id %>"><%= item.name %></a></td>
