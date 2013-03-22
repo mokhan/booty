@@ -15,7 +15,7 @@ class UnitOfWork
     unit_of_work = factory.create
     begin
       block.call
-    rescue
+    ensure
       unit_of_work.dispose
     end
   end
