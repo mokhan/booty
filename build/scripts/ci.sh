@@ -3,7 +3,8 @@ echo 'loading bashrc'
 source ~/.bashrc
 
 echo 'loading gemset'
-cd .
+#cd .
+rvm use ruby-2.0.0-p0@booty --create
 
 echo 'bundle install'
 bundle install
