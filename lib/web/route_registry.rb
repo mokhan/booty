@@ -3,26 +3,26 @@ require 'block_specification'
 
 module Booty
   class RouteRegistry
-    def initialize(commands = [])
-      @commands = commands
+    def initialize(routes = [])
+      @routes = routes
     end
 
-    def register(command)
+    def register(route)
       if block_given?
-        register_route(command) { |request| yield(request) }
+        register_route(route) { |request| yield(request) }
       else
-        register_route(command) { |request| command.matches(request) }
+        register_route(route) { |request| route.matches(request) }
       end
     end
 
-    def command_for(route)
-      @commands.find { |command| command.matches(route) }
+    def command_for(request)
+      @routes.find { |route| route.matches(request) }
     end
 
     private
 
     def register_route(command, &block)
-      @commands.push(RoutedCommand.new(BlockSpecification.new(&block), command))
+      @routes.push(RoutedCommand.new(BlockSpecification.new(&block), command))
     end
   end
 end
