@@ -9,6 +9,7 @@ module Booty
     end
     it "should have a title" do
       p "PAGE TITLE: #{sut.title}"
+      p sut.text
       sut.title.should == '404 - Page Not Found - Booty'
     end
   end
