@@ -2,7 +2,7 @@ require 'routed_command'
 require 'block_specification'
 
 module Booty
-  class CommandRegistry
+  class RouteRegistry
     def initialize(commands = [])
       @commands = commands
     end

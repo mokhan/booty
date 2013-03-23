@@ -7,7 +7,7 @@ end
 
 module Booty
   describe "routing" do
-    let(:registry) { CommandRegistry.new }
+    let(:registry) { RouteRegistry.new }
     let(:container) { Booty::Container.new }
 
     before :each do

@@ -6,7 +6,7 @@ class BootstrapContainer
   end
   def run
     logger.debug("initialize container")
-    @container.register(:command_registry) { Booty::CommandRegistry.new }.as_singleton
+    @container.register(:command_registry) { Booty::RouteRegistry.new }.as_singleton
     @container.register(:front_controller) { @container.build(Booty::FrontController) }
     @container.register(:view_engine) do
       Booty::ViewEngine.new('lib/commands', :master => 'master.html.erb')

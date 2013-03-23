@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 module Booty
-  describe CommandRegistry do
-    let(:sut) { CommandRegistry.new }
+  describe RouteRegistry do
+    let(:sut) { RouteRegistry.new }
 
     context "when looking up which command can process a request" do
       let(:correct_command) { fake }
