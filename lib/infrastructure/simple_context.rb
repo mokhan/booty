@@ -1,5 +1,5 @@
 class SimpleContext
-  def initialize(store)
+  def initialize(store = {})
     @store = store
   end
   def add(key, value)
