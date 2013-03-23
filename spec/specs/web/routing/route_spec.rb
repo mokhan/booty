@@ -1,7 +1,7 @@
 require "spec_helper"
 
-describe CommandProxy do
-  let(:sut) { CommandProxy.new(command, container, load_strategy) }
+describe Route do
+  let(:sut) { Route.new(command, container, load_strategy) }
   let(:command) { String }
   let(:container) { fake }
   let(:load_strategy) { fake }

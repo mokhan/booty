@@ -1,6 +1,6 @@
 require 'reload_file_strategy'
 
-class CommandProxy
+class Route
   def initialize(command, container, load_strategy = ReloadFileStrategy.new)
     @command = command
     @container = container
