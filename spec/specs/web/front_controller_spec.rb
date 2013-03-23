@@ -13,7 +13,7 @@ module Booty
       let(:response) { [] }
       let(:env) { {} }
       before(:each) do
-        command_registry.stub(:command_for).with(env).and_return(correct_command)
+        command_registry.stub(:route_for).with(env).and_return(correct_command)
         correct_command.stub(:run).and_return(template_result)
         template_result.stub(:run).with(view_engine).and_return(response)
       end
@@ -35,7 +35,7 @@ module Booty
       let(:env) { {} }
       let(:html) { "<html></html>" }
       before :each do
-        def command_registry.command_for(item)
+        def command_registry.route_for(item)
           raise error
         end
         view_engine.stub(:render).and_return(html)

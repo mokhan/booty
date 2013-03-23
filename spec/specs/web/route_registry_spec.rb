@@ -15,7 +15,7 @@ module Booty
       end
 
       before :each do
-        @result = sut.command_for(request).command
+        @result = sut.route_for(request).command
       end
       it "should return the command that can process the request" do
         @result.should == correct_command
@@ -38,10 +38,10 @@ module Booty
         end
       end
       it "should return the command that matches the first route" do
-        sut.command_for("BLAH").command.should == command
+        sut.route_for("BLAH").command.should == command
       end
       it "should return a command that matches the second route" do
-        sut.command_for("MOO").command.should == other_command
+        sut.route_for("MOO").command.should == other_command
       end
     end
 
@@ -52,7 +52,7 @@ module Booty
         sut.register(command)
       end
       it "should use the command for matching" do
-        sut.command_for("mee").command.should == command
+        sut.route_for("mee").command.should == command
       end
     end
   end

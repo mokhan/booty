@@ -6,7 +6,7 @@ module Booty
     end
     def call(env)
       begin
-        @command_registry.command_for(env).run(env).run(@view_engine)
+        @command_registry.route_for(env).run(env).run(@view_engine)
       rescue => e
         p e
         [501, {"Content-Type" => "text/html"}, [@view_engine.render(:template => '501.html.erb', :model => e)]]

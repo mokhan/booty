@@ -45,7 +45,7 @@ module Booty
     end
 
     def command_for(request)
-      registry.command_for(request).command
+      registry.route_for(request).command
     end
 
     def request_to(options)
