@@ -31,7 +31,6 @@ module Booty
     def erb_from(file, model)
       template = ERB.new(read_from(file))
       binding = binding_for(model)
-      p "rendering #{file} with #{model}"
       template.result(binding).chomp
     end
   end
