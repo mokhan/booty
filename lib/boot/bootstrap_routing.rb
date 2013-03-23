@@ -8,23 +8,29 @@ module Booty
     end
 
     def run
-      logger.debug("initializing routes")
-      register(Assets::AssetCommand.new)
-      register(proxy_to(Dashboard::IndexCommand))
-      register(proxy_to(Products::IndexCommand))
-      register(proxy_to(Products::IndexCommand))
-      register(proxy_to(Products::NewCommand))
-      register(proxy_to(Products::CreateCommand))
-      register(proxy_to(Products::ShowCommand))
-      register(proxy_to(Sessions::NewCommand))
-      register(@container.build(DefaultCommand))
+      @registry.register(Assets::AssetCommand.new)
+      @registry.register(proxy_to(Dashboard::IndexCommand)) do |request|
+        Dashboard::IndexCommand.matches?(request)
+      end
+      @registry.register(proxy_to(Products::IndexCommand)) do |request|
+        Products::IndexCommand.matches?(request)
+      end
+      @registry.register(proxy_to(Products::NewCommand)) do |request|
+        Products::NewCommand.matches?(request)
+      end
+      @registry.register(proxy_to(Products::CreateCommand)) do |request|
+        Products::CreateCommand.matches?(request)
+      end
+      @registry.register(proxy_to(Products::ShowCommand)) do |request|
+        Products::ShowCommand.matches?(request)
+      end
+      @registry.register(proxy_to(Sessions::NewCommand)) do |request|
+        Sessions::NewCommand.matches?(request)
+      end
+      @registry.register(@container.build(DefaultCommand))
     end
 
     private
-
-    def register(command)
-      @registry.register(command) if command
-    end
 
     def proxy_to(command)
       CommandProxy.new(command, @container)

@@ -6,7 +6,7 @@ module Booty
     def initialize(view_engine)
       @view_engine = view_engine
     end
-    def matches(request)
+    def matches?(request)
       true
     end
     def run(request)

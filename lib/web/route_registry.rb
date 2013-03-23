@@ -11,7 +11,7 @@ module Booty
       if block_given?
         register_route(route) { |request| yield(request) }
       else
-        register_route(route) { |request| route.matches(request) }
+        register_route(route) { |request| route.matches?(request) }
       end
     end
 

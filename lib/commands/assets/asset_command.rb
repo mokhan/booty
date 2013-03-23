@@ -8,7 +8,7 @@ module Booty
       def initialize(assets = [ Javascript.new, Stylesheet.new, Image.new ])
         @assets = assets
       end
-      def matches(request)
+      def matches?(request)
         @assets.any? { |asset| asset.matches(request) }
       end
       def run(request)

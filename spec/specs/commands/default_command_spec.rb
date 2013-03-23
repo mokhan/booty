@@ -7,7 +7,7 @@ module Booty
 
     context "when checking if it can process the request" do
       it "should return true" do
-        sut.matches({}).should be_true
+        sut.matches?({}).should be_true
       end
     end
   end

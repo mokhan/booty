@@ -5,7 +5,6 @@ class BootstrapContainer
     @container = container
   end
   def run
-    logger.debug("initialize container")
     @container.register(:command_registry) { Booty::RouteRegistry.new }.as_singleton
     @container.register(:front_controller) { @container.build(Booty::FrontController) }
     @container.register(:view_engine) do

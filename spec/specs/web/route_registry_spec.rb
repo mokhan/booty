@@ -48,7 +48,7 @@ module Booty
     context "when registering a route without a block" do
       let(:command) { fake }
       before :each do
-        command.stub(:matches).with("mee").and_return(true)
+        command.stub(:matches?).with("mee").and_return(true)
         sut.register(command)
       end
       it "should use the command for matching" do

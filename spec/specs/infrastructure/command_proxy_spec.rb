@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe CommandProxy do
   let(:sut) { CommandProxy.new(command, container, load_strategy) }
-  let(:command) { Booty::Dashboard::IndexCommand }
+  let(:command) { String }
   let(:container) { fake }
   let(:load_strategy) { fake }
 
@@ -27,10 +27,10 @@ describe CommandProxy do
     let(:now) { Time.now.nsec }
 
     before :each do
-      command.stub(:matches).with(request).and_return(now)
+      command.stub(:matches?).with(request).and_return(now)
     end
 
-    let(:result) { sut.matches(request) }
+    let(:result) { sut.matches?(request) }
 
     it "should delegate to the command" do
       result.should == now

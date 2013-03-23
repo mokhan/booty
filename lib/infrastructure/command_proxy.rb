@@ -6,8 +6,8 @@ class CommandProxy
     @container = container
     @load_strategy = load_strategy
   end
-  def matches(route)
-    @command.matches(route)
+  def matches?(route)
+    @command.matches?(route)
   end
   def run(request)
     @load_strategy.reload(@command)
