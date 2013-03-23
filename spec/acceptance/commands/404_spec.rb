@@ -8,6 +8,7 @@ module Booty
       sut.text.include?('404 - Page Not Found').should be_true
     end
     it "should have a title" do
+      p sus.title
       sut.title.should == '404 - Page Not Found - Booty'
     end
   end
