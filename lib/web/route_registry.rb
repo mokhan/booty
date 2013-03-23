@@ -16,7 +16,7 @@ module Booty
     end
 
     def route_for(request)
-      @routes.find { |route| route.matches(request) }
+      @routes.find { |route| route.matches?(request) }
     end
 
     private

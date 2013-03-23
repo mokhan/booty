@@ -11,7 +11,7 @@ module Booty
           specification.stub(:matches).with("blah").and_return(true)
         end
         it "should delegate to the specification given" do
-          sut.matches("blah").should be_true
+          sut.matches?("blah").should be_true
         end
       end
       context "when not matched" do
@@ -19,7 +19,7 @@ module Booty
           specification.stub(:matches).with("blah").and_return(false)
         end
         it "should delegate to the specification given" do
-          sut.matches("blah").should be_false
+          sut.matches?("blah").should be_false
         end
       end
     end

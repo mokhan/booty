@@ -6,7 +6,7 @@
       @command = command
     end
 
-    def matches(item)
+    def matches?(item)
       @specification.matches(item)
     end
 
