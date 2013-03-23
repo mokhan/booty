@@ -2,16 +2,16 @@ module Booty
   module Specification
     def or(other_predicate = nil, &block)
       matcher = create_predicate(other_predicate, &block)
-      create_predicate { |item| self.matches(item) || matcher.matches(item) }
+      create_predicate { |item| self.matches?(item) || matcher.matches?(item) }
     end
 
     def and(other_predicate = nil, &block)
       matcher = create_predicate(other_predicate, &block)
-      create_predicate { |item| self.matches(item) && matcher.matches(item) }
+      create_predicate { |item| self.matches?(item) && matcher.matches?(item) }
     end
 
     def not
-      create_predicate { |item| !self.matches(item) }
+      create_predicate { |item| !self.matches?(item) }
     end
 
     private

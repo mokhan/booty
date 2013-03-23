@@ -7,7 +7,7 @@
     end
 
     def matches?(item)
-      @specification.matches(item)
+      @specification.matches?(item)
     end
 
     def run(request)

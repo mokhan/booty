@@ -8,7 +8,7 @@ module Booty
       @block = block
     end
 
-    def matches(item)
+    def matches?(item)
       @block.call(item)
     end
   end

@@ -8,7 +8,7 @@ module Booty
     context "when matching" do
       context "when matched" do
         before :each do
-          specification.stub(:matches).with("blah").and_return(true)
+          specification.stub(:matches?).with("blah").and_return(true)
         end
         it "should delegate to the specification given" do
           sut.matches?("blah").should be_true
@@ -16,7 +16,7 @@ module Booty
       end
       context "when not matched" do
         before :each do
-          specification.stub(:matches).with("blah").and_return(false)
+          specification.stub(:matches?).with("blah").and_return(false)
         end
         it "should delegate to the specification given" do
           sut.matches?("blah").should be_false
