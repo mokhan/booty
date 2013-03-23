@@ -11,9 +11,12 @@ class CommandProxy
   end
   def run(request)
     @load_strategy.reload(@command)
-    @container.build(@command).run(request)
+    command.run(request)
   end
   def instance_of?(type)
     @command == type
+  end
+  def command
+   @container.build(@command)
   end
 end

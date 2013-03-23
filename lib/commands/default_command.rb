@@ -12,5 +12,8 @@ module Booty
     def run(request)
       HtmlResponse.new(:template => "/404.html.erb", :status => 404)
     end
+    def command
+      self
+    end
   end
 end

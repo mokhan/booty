@@ -8,21 +8,11 @@ module Booty
     end
 
     def register(route)
-      if block_given?
-        register_route(route) { |request| yield(request) }
-      else
-        register_route(route) { |request| route.matches?(request) }
-      end
+      @routes.push(route)
     end
 
     def route_for(request)
       @routes.find { |route| route.matches?(request) }
-    end
-
-    private
-
-    def register_route(command, &block)
-      @routes.push(RoutedCommand.new(BlockSpecification.new(&block), command))
     end
   end
 end

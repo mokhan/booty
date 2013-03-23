@@ -9,24 +9,12 @@ module Booty
 
     def run
       @registry.register(Assets::AssetCommand.new)
-      @registry.register(proxy_to(Dashboard::IndexCommand)) do |request|
-        Dashboard::IndexCommand.matches?(request)
-      end
-      @registry.register(proxy_to(Products::IndexCommand)) do |request|
-        Products::IndexCommand.matches?(request)
-      end
-      @registry.register(proxy_to(Products::NewCommand)) do |request|
-        Products::NewCommand.matches?(request)
-      end
-      @registry.register(proxy_to(Products::CreateCommand)) do |request|
-        Products::CreateCommand.matches?(request)
-      end
-      @registry.register(proxy_to(Products::ShowCommand)) do |request|
-        Products::ShowCommand.matches?(request)
-      end
-      @registry.register(proxy_to(Sessions::NewCommand)) do |request|
-        Sessions::NewCommand.matches?(request)
-      end
+      @registry.register(proxy_to(Dashboard::IndexCommand))
+      @registry.register(proxy_to(Products::IndexCommand))
+      @registry.register(proxy_to(Products::NewCommand))
+      @registry.register(proxy_to(Products::CreateCommand))
+      @registry.register(proxy_to(Products::ShowCommand))
+      @registry.register(proxy_to(Sessions::NewCommand))
       @registry.register(@container.build(DefaultCommand))
     end
 
