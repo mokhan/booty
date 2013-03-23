@@ -2,10 +2,13 @@ require "spec_helper"
 require 'watir-webdriver'
 
 def navigate_to(url, &block)
-  let(:sut) { Watir::Browser.new :phantomjs }
+  def sut
+    @browser
+  end
   before :all do
     TestDatabaseGateway.delete_all
     block.call if block_given?
+    @browser = Watir::Browser.new :phantomjs
     sut.goto "http://localhost:9292#{url}"
   end
   after :all do
