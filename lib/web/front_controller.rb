@@ -1,3 +1,5 @@
+require "log"
+
 module Booty
   class FrontController
     def initialize(command_registry, view_engine)
@@ -10,7 +12,7 @@ module Booty
         result = route.run(env)
         result.run(@view_engine)
       rescue => e
-        p e
+        logger.error(e)
         [501, {"Content-Type" => "text/html"}, [@view_engine.render(:template => '501.html.erb', :model => e)]]
       end
     end

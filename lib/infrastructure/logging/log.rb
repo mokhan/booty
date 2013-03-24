@@ -22,6 +22,6 @@ module Booty
 end
 class Object
   def logger
-    Booty::Log.for(self)
+    Booty::Log.for(self) || Logger.new(StringIO.new)
   end
 end
