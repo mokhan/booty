@@ -14,7 +14,7 @@ class UnitOfWork
   def self.create(factory, &block)
     unit_of_work = factory.create
     begin
-      block.call
+      block.call(unit_of_work)
     ensure
       unit_of_work.dispose
     end
