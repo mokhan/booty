@@ -7,4 +7,6 @@ echo 'loading gemset'
 rvm use ruby-2.0.0-p0@booty --create
 
 echo 'run deployment'
+git co master
+git pull
 bundle exec rake deploy --trace
