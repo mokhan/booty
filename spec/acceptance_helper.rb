@@ -8,8 +8,10 @@ def navigate_to(url, &block)
   before :all do
     TestDatabaseGateway.delete_all
     block.call if block_given?
-    @browser = Watir::Browser.new :phantomjs
-    sut.goto "http://localhost:9292#{url}"
+    @browser = Watir::Browser.new
+    url = "http://localhost:9292#{url}"
+    p "navigating to #{url}"
+    sut.goto url
   end
   after :all do
     sut.close
