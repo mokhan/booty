@@ -13,7 +13,6 @@ def navigate_to(url, &block)
   end
   after :all do
     sut.close
-    TestDatabaseGateway.delete_all
   end
 end
 
