@@ -7,9 +7,7 @@ module Booty
     def call(env)
       begin
         route = @command_registry.route_for(env)
-        p "ROUTE #{route}"
         result = route.run(env)
-        p "RESULT #{result}"
         result.run(@view_engine)
       rescue => e
         p e
