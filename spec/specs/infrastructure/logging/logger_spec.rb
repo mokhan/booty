@@ -6,7 +6,7 @@ describe Logger do
       logger = Logger.new(STDOUT)
       logger.level = Logger::DEBUG
 
-      logger.debug("i am logged")
+      #logger.debug("i am logged")
       #logger.close
     end
   end

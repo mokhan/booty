@@ -89,8 +89,8 @@ module Booty
         end
       end
       context "when a component cannot automatically be constructed" do
-        it "should return a nil instance" do
-          sut.build(Child).should be_nil
+        it "should raise an error" do
+          expect { sut.build(Child) }.to raise_error(ContainerError)
         end
       end
     end
