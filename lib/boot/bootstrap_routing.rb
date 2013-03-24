@@ -21,8 +21,7 @@ module Booty
     private
 
     def route_to(command)
-      Route.new(command, @container)
-      #proxy = Proxy.new(Route.new(command, @container))
+      proxy = Proxy.new(Route.new(command, @container))
       #proxy.add_interceptor(:run, UnitOfWorkInterceptor.new(UnitOfWorkFactory.new(SimpleContext.new,nil,Key.new("database.session")))
     end
   end
