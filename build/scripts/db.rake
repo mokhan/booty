@@ -49,7 +49,7 @@ class Database
 
   def create_connection_string_for(environment)
     configuration = load_configuration_for(environment)
-    "postgres://#{configuration["host"]}/#{configuration["database"]}"
+    "postgres://#{configuration['username']}:#{configuration['password']}@#{configuration['host']}/#{configuration['database']}"
   end
 end
 
