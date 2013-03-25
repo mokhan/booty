@@ -33,7 +33,7 @@ class Database
 
   def migrate(environment)
     connection_string = ENV["DATABASE_URL"] || create_connection_string_for(environment)
-    sh "sequel -m build/db/migrations -E #{connection_string}"
+    sh "bundle exec sequel -m build/db/migrations -E #{connection_string}"
   end
 
   private
