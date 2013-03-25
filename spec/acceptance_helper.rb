@@ -15,9 +15,13 @@ def navigate_to(url, &block)
   end
 
   def headless
-    require 'headless'
-    @headless ||= Headless.new
-    #@headless ||= OpenStruct.new(:start => true, :destroy => true)
+    if ENV['HEADLESS']
+      require 'headless'
+      p 'running HEADLESSly'
+      @headless ||= OpenStruct.new(:start => true, :destroy => true)
+    else
+      @headless ||= Headless.new
+    end
   end
 
   def sut
