@@ -1,5 +1,6 @@
 require "spec_helper"
 require 'watir-webdriver'
+require 'headless'
 
 def navigate_to(url, &block)
   def sut
@@ -8,6 +9,8 @@ def navigate_to(url, &block)
   before :all do
     TestDatabaseGateway.delete_all
     block.call if block_given?
+    @headless = Headless.new
+    @headless.start
     @browser = Watir::Browser.new
     url = "http://localhost:9292#{url}"
     p "navigating to #{url}"
@@ -15,6 +18,7 @@ def navigate_to(url, &block)
   end
   after :all do
     sut.close
+    @headless.destroy
   end
 end
 
