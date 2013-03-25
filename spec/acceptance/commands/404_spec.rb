@@ -10,5 +10,8 @@ module Booty
     it "should have a title" do
       sut.title.should == '404 - Page Not Found - Booty'
     end
+    it "should fail" do
+      raise StandardError
+    end
   end
 end

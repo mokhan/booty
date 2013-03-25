@@ -9,18 +9,25 @@ def navigate_to(url, &block)
     sut.goto "http://localhost:9292#{url}"
   end
 
+  after :each do
+    if example.exception
+      p "FAILED with #{example.exception}"
+      sut.screenshot.save 'tmp/screenshot.png'
+    end
+  end
+
   after :all do
-    sut.close
-    headless.destroy
+    sut.close if sut
+    headless.destroy if headless
   end
 
   def headless
     if ENV['HEADLESS']
       require 'headless'
       p 'running HEADLESSly'
-      @headless ||= OpenStruct.new(:start => true, :destroy => true)
-    else
       @headless ||= Headless.new
+    else
+      @headless ||= OpenStruct.new(:start => true, :destroy => true)
     end
   end
 
