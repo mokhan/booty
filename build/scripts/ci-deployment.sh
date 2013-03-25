@@ -10,5 +10,5 @@ echo 'run deployment'
 git checkout master
 git pull
 git push heroku master
-heroku run rake db:migrate --app booty
+heroku run rake db:migrate --app bootycall
 #bundle exec rake deploy --trace
