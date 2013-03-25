@@ -12,7 +12,7 @@ def navigate_to(url, &block)
   after :each do
     if example.exception
       p "FAILED with #{example.exception}"
-      sut.screenshot.save 'tmp/screenshot.png'
+      sut.screenshot.save "tmp/#{Time.now.strftime('%Y%m%d%H%M%S%L')}-screenshot.png"
     end
   end
 
@@ -24,7 +24,6 @@ def navigate_to(url, &block)
   def headless
     if ENV['HEADLESS']
       require 'headless'
-      p 'running HEADLESSly'
       @headless ||= Headless.new
     else
       @headless ||= OpenStruct.new(:start => true, :destroy => true)
