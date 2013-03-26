@@ -5,7 +5,7 @@ Dir.glob("lib/**/*.rb").each { |x| $:.unshift(File.dirname(x)) }
   Dir["#{File.dirname(__FILE__)}/lib/#{dir}/**/*.rb"].each { |f| require(f) }
 end
 require 'bootstrap_container'
-require 'bootstrap_routing'
+require 'routes'
 require 'log'
 
 module Booty
