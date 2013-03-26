@@ -4,7 +4,7 @@ class WebRequest
   attr_reader :request
 
   def initialize(raw_request)
-    @request = Rack::Request.new(raw_request)
+    @request = Rack::Request.new(raw_request.first)
   end
 
   def payload
