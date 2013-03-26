@@ -2,7 +2,16 @@ require "spec_helper"
 
 describe Repository do
   let(:sut) { Repository.new(:products, gateway, DataMapper.new(Product)) }
-  let(:gateway) { DatabaseGateway.new( DatabaseConnectionFactory.new(DatabaseConfiguration.new, SequelConnectionProvider.new)) }
+  #let(:gateway) { DatabaseGateway.new( DatabaseConnectionFactory.new(DatabaseConfiguration.new, SequelConnectionProvider.new)) }
+  let(:gateway) { DatabaseGateway.new(context, key) }
+  let(:context) { SimpleContext.new }
+  let(:key) { Key.new('blah') }
+  let(:session) { Session.new(connection) }
+  let(:connection) { DatabaseConnectionFactory.new(DatabaseConfiguration.new, SequelConnectionProvider.new).create_connection }
+
+  before :each do
+    context.add(key, session)
+  end
 
   context "when fetching all products from the database" do
     let(:product) { Product.new(:id => 1, :name => "putty") }

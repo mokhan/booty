@@ -9,6 +9,9 @@ class Key
     store[to_sym] = nil
   end
   def contained_in?(store)
+    item_from(store)
+  end
+  def item_from(store)
     store[to_sym]
   end
   def to_sym

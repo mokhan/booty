@@ -11,4 +11,7 @@ class SimpleContext
   def contains?(key)
     key.contained_in?(@store)
   end
+  def item_for(key)
+    key.item_from(@store)
+  end
 end

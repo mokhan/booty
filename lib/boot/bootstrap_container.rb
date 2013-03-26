@@ -14,7 +14,7 @@ class BootstrapContainer
       Repository.new(:products, @container.resolve(:database_gateway), DataMapper.new(Product))
     end
     @container.register(:database_gateway) do
-      DatabaseGateway.new(@container.resolve(:database_connection_factory))
+      @container.build(DatabaseGateway)
     end
     @container.register(:database_connection_factory) do
       DatabaseConnectionFactory.new(@container.resolve(:database_configuration), @container.resolve(:database_connection_provider))
@@ -24,6 +24,22 @@ class BootstrapContainer
     end
     @container.register(:database_connection_provider) do
       SequelConnectionProvider.new
+    end
+    @container.register(:unit_of_work_interceptor) do
+      @container.build(UnitOfWorkInterceptor)
+    end
+    @container.register(:unit_of_work_factory) do
+      @container.build(UnitOfWorkFactory)
+    end
+    @container.register(:context) do
+      #this should be scoped to each request
+      SimpleContext.new
+    end.as_singleton
+    @container.register(:session_factory) do
+      @container.build(SessionFactory)
+    end
+    @container.register(:key) do
+      Key.new("database.session")
     end
     Booty::IOC.bind_to(@container)
   end

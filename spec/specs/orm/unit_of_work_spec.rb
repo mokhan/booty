@@ -6,11 +6,14 @@ describe UnitOfWork do
   let(:context) { fake }
   let(:key) { fake }
 
-  context "when committing a unit of work" do
-    before { sut.commit }
+  context "when running a unit of work" do
+    before :each do
+      sut.run do
+      end
+    end
 
-    it "should flush the session" do
-      session.should have_received(:flush)
+    it "should forward the block to the session" do
+      session.should have_received(:run)
     end
   end
   context "when ending a unit of work" do

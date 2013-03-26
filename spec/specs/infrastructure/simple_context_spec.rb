@@ -47,4 +47,13 @@ describe SimpleContext do
       end
     end
   end
+  context "when retrieving an item" do
+    let(:key) { Key.new("name") }
+    before { sut.add(key, 'mo') }
+    let(:result) { sut.item_for(key) }
+
+    it "should return the correct item" do
+      result.should == 'mo'
+    end
+  end
 end

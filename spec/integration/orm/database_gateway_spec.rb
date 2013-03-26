@@ -2,13 +2,18 @@ require "spec_helper"
 
 describe DatabaseGateway do
   let(:connection_factory) { DatabaseConnectionFactory.new(DatabaseConfiguration.new, SequelConnectionProvider.new) }
-  let(:sut) { DatabaseGateway.new(connection_factory) }
+  let(:sut) { DatabaseGateway.new(context, key) }
+  let(:context) { SimpleContext.new }
+  let(:key) { Key.new('blah') }
+  let(:session) { Session.new(connection) }
+  let(:connection) { connection_factory.create_connection }
 
   before :each do
     TestDatabaseGateway.connection.create_table :users do
       primary_key :id
       String :name
     end
+    context.add(key, session)
   end
   after(:each) do
     TestDatabaseGateway.connection.drop_table :users

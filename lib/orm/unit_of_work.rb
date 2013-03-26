@@ -4,8 +4,8 @@ class UnitOfWork
     @context = context
     @key = key
   end
-  def commit
-    @session.flush
+  def run(&block)
+    @session.run(&block)
   end
   def dispose
     @context.remove(@key)
@@ -14,7 +14,7 @@ class UnitOfWork
   def self.create(factory, &block)
     unit_of_work = factory.create
     begin
-      block.call(unit_of_work)
+      unit_of_work.run(&block)
     ensure
       unit_of_work.dispose
     end
