@@ -11,7 +11,7 @@ GEM
     fakes-rspec (1.0.2)
       fakes
       rspec
-    ffi (1.5.0)
+    ffi (1.6.0)
     gem_plugin (0.2.3)
     headless (1.0.1)
     mongrel (1.2.0.pre2)
@@ -20,7 +20,7 @@ GEM
     multi_json (1.7.2)
     pg (0.14.1)
     rack (1.5.2)
-    rake (10.0.3)
+    rake (10.0.4)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
       rspec-expectations (~> 2.13.0)
