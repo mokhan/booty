@@ -22,7 +22,7 @@ def navigate_to(url, &block)
   end
 
   def headless
-    if ENV['HEADLESS']
+    if ENV['CI']
       require 'headless'
       @headless ||= Headless.new
     else
