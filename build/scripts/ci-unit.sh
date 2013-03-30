@@ -13,4 +13,5 @@ echo 'cp db config'
 cp build/db/ci.configuration.yml build/db/configuration.yml
 
 echo 'run tests'
+export CI=true
 bundle exec rake spec:unit --trace
