@@ -8,7 +8,7 @@ class BootstrapContainer
     @container.register(:command_registry) { Booty::RouteRegistry.new }.as_singleton
     @container.register(:front_controller) { @container.build(Booty::FrontController) }
     @container.register(:view_engine) do
-      Booty::ViewEngine.new('lib/commands', :master => 'master.html.erb')
+      Booty::ViewEngine.new(:root_path => 'lib/commands', :master => 'master.html.erb')
     end
     @container.register(:products_repository) do
       Repository.new(:products, @container.resolve(:database_gateway), DataMapper.new(Product))

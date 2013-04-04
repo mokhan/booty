@@ -3,16 +3,14 @@ require 'expose_binding_behaviour'
 
 module Booty
   class ViewEngine
-
-    def initialize(root_path = 'lib/commands', master: 'master.html.erb' )
+    def initialize(root_path: 'lib/commands', master: 'master.html.erb')
       @root_path = root_path
       @master = master
     end
 
-    def render(options = {})
-      model = options[:model]
+    def render(template: '', model: OpenStruct.new )
       dto = OpenStruct.new(:model => model)
-      html = erb_from(options[:template], dto).gsub(/\n/, '')
+      html = erb_from(template, dto).gsub(/\n/, '')
       dto.content = html
       erb_from(@master, dto)
     end
@@ -33,5 +31,8 @@ module Booty
       binding = binding_for(model)
       template.result(binding).chomp
     end
+  end
+  class TemplateExpansion
+
   end
 end
