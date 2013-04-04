@@ -8,8 +8,7 @@ module Booty
 
     def render(template: '', model: OpenStruct.new )
       dto = OpenStruct.new(:model => model)
-      html = @template_expander.expand(template, dto).gsub(/\n/, '')
-      dto.content = html
+      dto.content = @template_expander.expand(template, dto)
       @template_expander.expand(@master, dto)
     end
   end

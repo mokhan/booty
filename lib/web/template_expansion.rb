@@ -9,7 +9,7 @@ module Booty
     def expand(file, model)
       template = ERB.new(read_from(file))
       binding = binding_for(model)
-      template.result(binding).chomp
+      template.result(binding).chomp.gsub(/\n/, '')
     end
     private
     def read_from(file)
