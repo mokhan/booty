@@ -2,17 +2,22 @@ require "spec_helper"
 class UrlBuilder
   def initialize(url)
     @url = url
-    @params = []
+    @params = Hash.new()
   end
   def append(key, value)
-    @params.push("#{key}=#{CGI.escape(value)}")
+    @params[key] = [] unless @params.has_key?(key)
+    @params[key].push(CGI.escape(value))
   end
   def build
     result = @url.clone
-    result << "?" if @params.any?
-    @params.each_with_index do |param,index|
-      result << '&' unless index == 0
-      result << param
+    result << "?" if @params.keys.any?
+    @params.keys.each_with_index do |key, i|
+      result << "&" unless i == 0
+      result << "#{key}="
+      @params[key].each_with_index do |value,index|
+        result << "+" unless index == 0
+        result << value.to_s
+      end
     end
     result
   end
@@ -46,6 +51,15 @@ describe UrlBuilder do
 
       it "should append the query string param" do
         result.should == "#{url}?scope=https%3A%2F%2Fwww.googleapis.com&redirect_uri=https%3A%2F%2Fmokhan.ca"
+      end
+    end
+    context "when multiple values are added for the same key" do
+      before :each do
+        sut.append(:scope, 'blah')
+        sut.append(:scope, 'huh')
+      end
+      it "should append each one correctly" do
+        result.should == "#{url}?scope=blah+huh"
       end
     end
   end
