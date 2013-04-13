@@ -2,13 +2,19 @@ require "spec_helper"
 class UrlBuilder
   def initialize(url)
     @url = url
+    @params = []
   end
   def append(key, value)
-    @param = "#{key}=#{CGI.escape(value)}"
+    @params.push("#{key}=#{CGI.escape(value)}")
   end
   def build
-    return "#{@url}?#{@param}" if @param
-    @url
+    result = @url.clone
+    result << "?" if @params.any?
+    @params.each_with_index do |param,index|
+      result << '&' unless index == 0
+      result << param
+    end
+    result
   end
 end
 
@@ -30,6 +36,16 @@ describe UrlBuilder do
 
       it "should append the query string param" do
         result.should == "#{url}?scope=https%3A%2F%2Fwww.googleapis.com"
+      end
+    end
+    context "with different query string params" do
+      before :each do
+        sut.append(:scope, "https://www.googleapis.com") 
+        sut.append(:redirect_uri, "https://mokhan.ca") 
+      end
+
+      it "should append the query string param" do
+        result.should == "#{url}?scope=https%3A%2F%2Fwww.googleapis.com&redirect_uri=https%3A%2F%2Fmokhan.ca"
       end
     end
   end
