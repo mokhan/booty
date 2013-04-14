@@ -21,5 +21,8 @@ module Booty
       end
       result
     end
+    def to_s
+      build
+    end
   end
 end
