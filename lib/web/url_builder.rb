@@ -7,6 +7,7 @@ module Booty
     def append(key, value)
       @params[key] = [] unless @params.has_key?(key)
       @params[key].push(CGI.escape(value))
+      self
     end
     def build
       result = @url.clone
