@@ -10,3 +10,4 @@ gem 'sequel'
 gem 'pg'
 gem 'headless'
 gem 'simplecov', :require => false, :group => :test
+gem 'oauth2'
