@@ -7,7 +7,7 @@ module Booty
     end
 
     def expand(binding)
-      ERB.new(@content).result(binding).chomp.gsub(/\n/, '')
+      ERB.new(@content).result(binding)
     end
   end
 end
