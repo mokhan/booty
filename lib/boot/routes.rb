@@ -17,6 +17,7 @@ module Booty
       @registry.register(route_to(Sessions::NewCommand))
       @registry.register(route_to(Sessions::OAuth::NewCommand))
       @registry.register(route_to(Sessions::CreateCommand))
+      @registry.register(route_to(Registrations::CreateCommand))
       @registry.register(@container.build(DefaultCommand))
     end
 

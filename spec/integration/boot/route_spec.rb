@@ -20,6 +20,7 @@ module Booty
         request_to({ :path => "/", :method => :GET }).should route_to(Booty::Dashboard::IndexCommand)
       end
     end
+
     context "products" do
       it "should route to the index" do
         request_to({ :path => "/products", :method => :GET }).should route_to(Booty::Products::IndexCommand)
@@ -34,6 +35,7 @@ module Booty
         request_to({ :path => "/products/1", :method => :GET }).should route_to(Booty::Products::ShowCommand)
       end
     end
+
     context "sessions" do
       it "should route to the new page" do
         request_to({ :path => "/sessions/new", :method => :GET}).should route_to(Booty::Sessions::NewCommand)
@@ -41,6 +43,12 @@ module Booty
 
       it "should route to the new oauth page" do
         request_to({ :path => "/sessions/new/oauth", :method => :GET}).should route_to(Booty::Sessions::OAuth::NewCommand)
+      end
+    end
+
+    context "registrations" do
+      it "should route to the create action" do
+        request_to({ :path => '/registrations/create', :method => :POST}).should route_to(Booty::Registrations::CreateCommand)
       end
     end
 
