@@ -8,7 +8,7 @@ class TestDatabaseGateway
 
   def self.delete_all
     TestDatabaseGateway.connection.from(:products).delete
-    TestDatabaseGateway.connection.from(:users).delete
+    TestDatabaseGateway.connection.from(:users).delete rescue nil
   end
 
   private

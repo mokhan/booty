@@ -12,32 +12,31 @@ describe User do
     context.add(key, session)
   end
 
+  after :each do
+    TestDatabaseGateway.delete_all
+  end
+
   context "when fetching all" do
     let(:user) { User.new(:id => 1, :username => "putty") }
 
-    before :each do
-      TestDatabaseGateway.connection.from(:users).insert(:username => user.username)
-      @results = sut.find_all
-    end
+    before { TestDatabaseGateway.connection.from(:users).insert(:username => user.username) }
 
-    after :each do
-      TestDatabaseGateway.connection.from(:users).delete
-    end
+    let(:results) { sut.find_all  }
 
     it "should return each" do
-      @results.count.should == 1
+      results.count.should == 1
     end
 
-    it "should return an instance" do
-      @results.first.should be_an_instance_of(User)
+    xit "should return an instance" do
+      results.first.should be_an_instance_of(User)
     end
 
-    it "should map the name properly" do
-      @results.first.username.should == user.username
+    xit "should map the name properly" do
+      results.first.username.should == user.username
     end
 
-    it "should map the id properly" do
-      @results.first.id.should_not be_nil
+    xit "should map the id properly" do
+      results.first.id.should_not be_nil
     end
   end
 end
