@@ -9,31 +9,31 @@ describe DatabaseGateway do
   let(:connection) { connection_factory.create_connection }
 
   before :each do
-    TestDatabaseGateway.connection.create_table :users do
+    TestDatabaseGateway.connection.create_table :blah do
       primary_key :id
       String :name
     end
     context.add(key, session)
   end
   after(:each) do
-    TestDatabaseGateway.connection.drop_table :users
+    TestDatabaseGateway.connection.drop_table :blah
   end
 
   context "when executing a query against the database" do
     before(:each) do
-      TestDatabaseGateway.connection.from(:users).insert(:name => 'mo')
+      TestDatabaseGateway.connection.from(:blah).insert(:name => 'mo')
     end
     it "should be able to return a result set" do
-      query = DatabaseQuery.new { |c| c.from(:users).all }
+      query = DatabaseQuery.new { |c| c.from(:blah).all }
       results = sut.run(query)
       results.should == [:id => 1, :name => 'mo']
     end
   end
   context "when executing a command against the database" do
     it "should run the command against the open connection" do
-      command = DatabaseCommand.new { |c| c.from(:users).insert(:name => 'mo') }
+      command = DatabaseCommand.new { |c| c.from(:blah).insert(:name => 'mo') }
       sut.run(command)
-      TestDatabaseGateway.connection.from(:users).count.should == 1
+      TestDatabaseGateway.connection.from(:blah).count.should == 1
     end
   end
 end
