@@ -13,6 +13,9 @@ class BootstrapContainer
     @container.register(:products_repository) do
       Repository.new(:products, @container.resolve(:database_gateway), DataMapper.new(Product))
     end
+    @container.register(:users_repository) do
+      Repository.new(:users, @container.resolve(:database_gateway), DataMapper.new(User))
+    end
     @container.register(:database_gateway) do
       @container.build(DatabaseGateway)
     end
