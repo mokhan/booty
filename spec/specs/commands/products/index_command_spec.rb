@@ -28,7 +28,7 @@ module Booty
         end
 
         it "should render the proper view" do
-          @result.template.should == '/products/index.html.erb'
+          @result.template.should == '/products/index'
         end
       end
     end

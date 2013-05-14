@@ -10,7 +10,7 @@ module Booty
       end
 
       def run(request)
-        HtmlResponse.new(:template => "/products/new.html.erb")
+        HtmlResponse.new(:template => "/products/new")
       end
     end
   end

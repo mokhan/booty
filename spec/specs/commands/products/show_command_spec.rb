@@ -27,7 +27,7 @@ describe Booty::Products::ShowCommand do
     end
 
     it "should render the correct view" do
-      result.template.should == '/products/show.html.erb'
+      result.template.should == '/products/show'
     end
   end
 end

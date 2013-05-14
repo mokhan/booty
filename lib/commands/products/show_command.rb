@@ -11,7 +11,7 @@ module Booty
       def respond_to(request)
         id = request.path.match(/.*\/(\d+)+$/)[1].to_i
         product = @repository.find_by(id)
-        HtmlResponse.new(:template => "/products/show.html.erb", :model => product)
+        HtmlResponse.new(:template => "/products/show", :model => product)
       end
     end
   end

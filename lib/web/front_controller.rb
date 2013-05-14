@@ -11,7 +11,7 @@ module Booty
         @command_registry.route_for(env).run(env).run(@view_engine)
       rescue => e
         logger.error(e)
-        [501, {"Content-Type" => "text/html"}, [@view_engine.render(:template => '501.html.erb', :model => e)]]
+        [501, {"Content-Type" => "text/html"}, [@view_engine.render(:template => '501', :model => e)]]
       end
     end
   end

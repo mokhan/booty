@@ -16,7 +16,7 @@ describe Booty::Products::NewCommand do
     end
 
     it "should return the proper template" do
-      @result.template.should == '/products/new.html.erb'
+      @result.template.should == '/products/new'
     end
   end
 end

@@ -10,7 +10,7 @@ module Booty
         @repository = products_repository
       end
       def run(request)
-        HtmlResponse.new(:template => "/products/index.html.erb", :model => @repository.find_all)
+        HtmlResponse.new(:template => "/products/index", :model => @repository.find_all)
       end
     end
   end

@@ -28,7 +28,7 @@ module Booty
       context "when rendering the home page" do
         let(:html) { "<html></html>" }
         before :each do
-          view_engine.stub(:render).with(:template => "/dashboard/index.html.erb").and_return(html)
+          view_engine.stub(:render).with(:template => "/dashboard/index").and_return(html)
         end
         let(:result) { sut.run(nil) }
 
@@ -36,7 +36,7 @@ module Booty
           result.status.should == 200
         end
         it "should return the proper template" do
-          result.template.should == "/dashboard/index.html.erb"
+          result.template.should == "/dashboard/index"
         end
       end
     end

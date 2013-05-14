@@ -6,7 +6,7 @@ module Booty
       handles :uri => /^\/sessions\/create$/, :method => :POST
 
       def respond_to(request)
-        HtmlResponse.new(:template => '/sessions/create.html.erb', :model => fetch_response_for(request.payload[:code]))
+        HtmlResponse.new(:template => '/sessions/create', :model => fetch_response_for(request.payload[:code]))
       end
 
       private

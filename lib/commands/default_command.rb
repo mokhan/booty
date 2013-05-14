@@ -10,7 +10,7 @@ module Booty
       true
     end
     def run(request)
-      HtmlResponse.new(:template => "/404.html.erb", :status => 404)
+      HtmlResponse.new(:template => "/404", :status => 404)
     end
     def command
       self
