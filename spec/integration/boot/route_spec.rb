@@ -38,6 +38,10 @@ module Booty
       it "should route to the new page" do
         request_to({ :path => "/sessions/new", :method => :GET}).should route_to(Booty::Sessions::NewCommand)
       end
+
+      it "should route to the new oauth page" do
+        request_to({ :path => "/sessions/new/oauth", :method => :GET}).should route_to(Booty::Sessions::OAuth::NewCommand)
+      end
     end
 
     it "should route to the 404 handler" do
