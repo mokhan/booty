@@ -5,8 +5,10 @@ class TestDatabaseGateway
   def self.connection
     @connection ||= Sequel.connect(ENV['DATABASE_URL'] || build_connection_string)
   end
+
   def self.delete_all
     TestDatabaseGateway.connection.from(:products).delete
+    TestDatabaseGateway.connection.from(:users).delete
   end
 
   private

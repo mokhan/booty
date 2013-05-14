@@ -2,6 +2,8 @@ require "domain_object"
 require "bcrypt"
 
 class User < DomainObject
+  attr_reader :username
+
   def change_password(password)
     @password_hash = BCrypt::Password.create(password)
   end
