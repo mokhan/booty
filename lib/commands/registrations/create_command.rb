@@ -1,6 +1,6 @@
 module Booty
   module Registrations
-    class CreateCommand < Booty::RouteCommand
+    class CreateCommand < RouteCommand
       handles :uri => /^\/registrations\/create$/, :method => :POST
 
       def initialize(users_repository)

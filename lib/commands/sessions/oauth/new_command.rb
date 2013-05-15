@@ -1,3 +1,5 @@
+require 'oauth2'
+
 module Booty
   module Sessions
     module OAuth
