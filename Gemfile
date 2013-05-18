@@ -2,13 +2,20 @@ source "https://rubygems.org"
 ruby '2.0.0'
 gem 'rake'
 gem 'rack'
-gem 'mongrel', '>= 1.1.5.pre'
-gem 'rspec'
-gem 'fakes-rspec'
-gem 'watir-webdriver'
 gem 'sequel'
 gem 'pg'
-gem 'headless'
-gem 'simplecov', :require => false, :group => :test
 gem 'oauth2'
 gem 'bcrypt-ruby'
+gem 'spank'
+
+group :development do
+  gem 'mongrel', '>= 1.1.5.pre'
+end
+
+group :test do
+  gem 'rspec'
+  gem 'fakes-rspec'
+  gem 'watir-webdriver'
+  gem 'headless'
+  gem 'simplecov', :require => false
+end
