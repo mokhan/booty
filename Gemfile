@@ -23,4 +23,5 @@ end
 
 group :production do
   gem 'unicorn'
+  gem 'mongrel', '>= 1.1.5.pre'
 end
