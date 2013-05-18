@@ -18,4 +18,9 @@ group :test do
   gem 'watir-webdriver'
   gem 'headless'
   gem 'simplecov', :require => false
+  gem 'mongrel', '>= 1.1.5.pre'
+end
+
+group :production do
+  gem 'unicorn'
 end

@@ -20,6 +20,7 @@ GEM
     httpauth (0.2.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
+    kgio (2.8.0)
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
       gem_plugin (~> 0.2.3)
@@ -35,6 +36,7 @@ GEM
       rack (~> 1.2)
     pg (0.15.1)
     rack (1.5.2)
+    raindrops (0.11.0)
     rake (10.0.4)
     rspec (2.13.0)
       rspec-core (~> 2.13.0)
@@ -56,6 +58,10 @@ GEM
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
     spank (0.0.1)
+    unicorn (4.6.2)
+      kgio (~> 2.6)
+      rack
+      raindrops (~> 0.7)
     watir-webdriver (0.6.4)
       selenium-webdriver (>= 2.18.0)
     websocket (1.0.7)
@@ -76,4 +82,5 @@ DEPENDENCIES
   sequel
   simplecov
   spank
+  unicorn
   watir-webdriver
