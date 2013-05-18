@@ -1,3 +1,5 @@
+require 'route_command'
+
 module Booty
   module Registrations
     class CreateCommand < Booty::RouteCommand
