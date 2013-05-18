@@ -21,4 +21,6 @@ module Booty
   end
 end
 
+use Rack::Deflater
+use Rack::Static, :urls => ["/images", "/js", "/css"], :root => "assets"
 run Booty::Application.run
