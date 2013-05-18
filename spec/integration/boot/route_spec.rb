@@ -8,7 +8,7 @@ end
 module Booty
   describe "routing" do
     let(:registry) { RouteRegistry.new }
-    let(:container) { Booty::Container.new }
+    let(:container) { Spank::Container.new }
 
     before :each do
       BootstrapContainer.new(container).run

@@ -2,7 +2,7 @@ Dir["#{File.dirname(__FILE__)}/../commands/**/*.rb"].each { |f| load(f) }
 
 module Booty
   class BootstrapRouting
-    def initialize(registry = IOC.resolve(:command_registry), container = IOC.resolve(:container))
+    def initialize(registry = Spank::IOC.resolve(:command_registry), container = Spank::IOC.resolve(:container))
       @registry = registry
       @container = container
     end
@@ -24,7 +24,7 @@ module Booty
     private
 
     def route_to(command)
-      proxy = Proxy.new(Route.new(command, @container))
+      proxy = Spank::Proxy.new(Route.new(command, @container))
       proxy.add_interceptor(:run, @container.resolve(:unit_of_work_interceptor))
       proxy
     end

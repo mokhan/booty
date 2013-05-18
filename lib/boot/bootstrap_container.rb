@@ -1,7 +1,7 @@
 require 'product'
 
 class BootstrapContainer
-  def initialize(container = Booty::Container.new)
+  def initialize(container = Spank::Container.new)
     @container = container
   end
   def run
@@ -44,6 +44,6 @@ class BootstrapContainer
     @container.register(:key) do
       Key.new("database.session")
     end
-    Booty::IOC.bind_to(@container)
+    Spank::IOC.bind_to(@container)
   end
 end

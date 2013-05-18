@@ -10,7 +10,7 @@ module Booty
         before :each do
           blackbook.stub(:find).and_return("booty call")
           container.stub(:resolve).with(:blackbook).and_return(blackbook)
-          IOC.bind_to(container)
+          ::Spank::IOC.bind_to(container)
         end
 
         it "should invoke the target" do
@@ -21,7 +21,7 @@ module Booty
         let(:container) { fake }
 
         before :each do
-          IOC.bind_to(container)
+          ::Spank::IOC.bind_to(container)
           Lazy.load(:blackbook)
         end
 

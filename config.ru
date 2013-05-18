@@ -16,7 +16,7 @@ module Booty
       BootstrapRouting.new.run
       logger.debug("starting up http://localhost:9292")
 
-      IOC.resolve(:front_controller)
+      Spank::IOC.resolve(:front_controller)
     end
   end
 end

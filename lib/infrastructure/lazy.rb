@@ -1,4 +1,4 @@
-require 'ioc'
+require 'spank'
 
 module Booty
   class Lazy 
@@ -11,7 +11,7 @@ module Booty
       @target.send(name, args, &block)
     end
 
-    def self.load(key, resolver = ->() { IOC.resolve(key) })
+    def self.load(key, resolver = ->() { Spank::IOC.resolve(key) })
       Lazy.new(resolver)
     end
   end
