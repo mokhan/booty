@@ -1,4 +1,5 @@
 require 'product'
+require 'user'
 
 class BootstrapContainer
   def initialize(container = Spank::Container.new)
