@@ -9,7 +9,12 @@ module Booty
     end
 
     def run(view_engine)
-      [@status, {"Content-Type" => @content_type}, [File.read(File.join(Dir.pwd, @file_path))]]
+      headers = {
+        "Content-Type" => @content_type,
+        "Cache-control" => "public, max-age=31536000",
+        "Expires" => "Wed, 01 Jan 2014 22:00:00 GMT"
+      }
+      [@status, headers, [File.read(File.join(Dir.pwd, @file_path))]]
     end
   end
 end
