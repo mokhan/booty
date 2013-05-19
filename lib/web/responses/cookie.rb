@@ -7,7 +7,7 @@
     end
 
     def prepare(headers)
-      Rack::Utils.set_cookie_header!(headers, @name, @value)
+      Rack::Utils.set_cookie_header!(headers, @name, {:value => @value, :path => "/", :expires => Time.now+(336*60*60)})
     end
 
     def ==(other)

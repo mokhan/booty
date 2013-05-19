@@ -15,6 +15,10 @@ class WebRequest
     @request.path
   end
 
+  def cookies
+    @request.cookies
+  end
+
   private
 
   def convert_hash(hash)

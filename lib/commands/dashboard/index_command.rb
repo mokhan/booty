@@ -1,4 +1,5 @@
 require "route_command"
+require "ostruct"
 
 module Booty
   module Dashboard
@@ -9,7 +10,8 @@ module Booty
         @view_engine = view_engine
       end
 
-      def run(request)
+      def respond_to(request)
+        p request.cookies
         HtmlResponse.new(:template => "/dashboard/index")
       end
     end
