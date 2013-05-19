@@ -6,7 +6,7 @@ module Booty
       let(:sut) { Booty::Registrations::CreateCommand.new(repository) }
       let(:repository) { fake }
 
-      describe "when run" do
+      describe "when run with a usable username and password" do
         let(:request) { fake }
         let(:user) { fake }
 
@@ -28,6 +28,10 @@ module Booty
 
         it "should update the users password" do
           user.should have_received(:change_password, 'password')
+        end
+
+        it "should issue a cookie to the browser" do
+          p result
         end
       end
     end

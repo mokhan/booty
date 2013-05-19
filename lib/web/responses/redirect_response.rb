@@ -6,8 +6,11 @@ module Booty
       @location = location
       @status = 301
     end
+
     def run(view_engine)
-      [@status, {"Location" => @location}, []]
+      headers = {"Location" => @location}
+      #Rack::Utils.set_cookie_header!(headers, 'blah', 'huh')
+      [@status, headers, []]
     end
   end
 end

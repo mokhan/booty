@@ -3,7 +3,7 @@ require 'route_command'
 module Booty
   module Registrations
     class CreateCommand < Booty::RouteCommand
-      handles :uri => /^\/registrations\/create$/, :method => :POST
+      handles :uri => /^\/registrations\/$/, :method => :POST
 
       def initialize(users_repository)
         @users = users_repository

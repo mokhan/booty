@@ -48,7 +48,7 @@ module Booty
 
     context "registrations" do
       it "should route to the create action" do
-        request_to({ :path => '/registrations/create', :method => :POST}).should route_to(Booty::Registrations::CreateCommand)
+        request_to({ :path => '/registrations/', :method => :POST}).should route_to(Booty::Registrations::CreateCommand)
       end
     end
 
