@@ -4,7 +4,7 @@
     end
 
     def add(cookie)
-      @cookies.push(cookie)
+      cookies.push(cookie)
     end
 
     def add_to(headers)
@@ -14,6 +14,10 @@
     end
 
     def include?(cookie)
-      @cookies.include?(cookie)
+      cookies.include?(cookie)
     end
+
+    private
+
+    attr_reader :cookies
   end

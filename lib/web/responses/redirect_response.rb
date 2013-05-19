@@ -16,11 +16,5 @@ module Booty
     def run(view_engine)
       [@status, cookie_jar.add_to({"Location" => @location}), []]
     end
-
-    private
-
-    def cookies
-      @cookies || []
-    end
   end
 end
