@@ -2,7 +2,7 @@
 module Booty
   module Sessions
     class CreateCommand < RouteCommand
-      handles :uri => /^\/sessions\/create$/, :method => :POST
+      handles :uri => /^\/sessions\/$/, :method => :POST
 
       def respond_to(request)
         HtmlResponse.new(:template => '/sessions/create', :model => fetch_response_for(request.payload[:code]))

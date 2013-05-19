@@ -44,6 +44,10 @@ module Booty
       it "should route to the new oauth page" do
         request_to({ :path => "/sessions/new/oauth", :method => :GET}).should route_to(Booty::Sessions::OAuth::NewCommand)
       end
+
+      it "should route to the create page" do
+        request_to({ :path => "/sessions/", :method => :POST}).should route_to(Booty::Sessions::CreateCommand)
+      end
     end
 
     context "registrations" do
