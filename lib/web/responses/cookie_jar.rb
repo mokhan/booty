@@ -11,6 +11,7 @@
       cookies.each do |cookie|
         cookie.prepare(headers)
       end
+      headers
     end
 
     def include?(cookie)
