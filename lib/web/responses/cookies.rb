@@ -1,3 +1,3 @@
   module Cookies
-    SESSION=:s
+    SESSION='s'
   end
