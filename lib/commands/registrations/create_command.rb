@@ -10,8 +10,9 @@ module Booty
       end
 
       def respond_to(request)
-        @users.save(map_from(request.payload))
-        RedirectResponse.new
+        user = map_from(request.payload)
+        @users.save(user)
+        RedirectResponse.new.add(Cookie.new(Cookies::SESSION, user.id))
       end
 
       private

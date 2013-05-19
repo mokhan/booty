@@ -11,6 +11,7 @@ module Booty
         let(:user) { fake }
 
         before :each do
+          user.stub(:id).and_return(10)
           User.stub(:new).with(:username => 'mo').and_return(user)
           request.stub(:payload).and_return({:username => 'mo', :password => 'password'})
         end
@@ -31,7 +32,7 @@ module Booty
         end
 
         it "should issue a cookie to the browser" do
-          p result
+          result.cookie_jar.should include(Cookie.new(Cookies::SESSION, user.id))
         end
       end
     end
