@@ -9,7 +9,7 @@ module Booty
 
     def run
       @registry.register(Assets::AssetCommand.new)
-      @registry.register(route_to(Dashboard::IndexCommand))
+      @registry.register(route_to(Dashboard::IndexCommand, [@container.resolve(:current_user_interceptor)]))
       @registry.register(route_to(Products::IndexCommand))
       @registry.register(route_to(Products::NewCommand))
       @registry.register(route_to(Products::CreateCommand))
@@ -23,9 +23,10 @@ module Booty
 
     private
 
-    def route_to(command)
+    def route_to(command, interceptors = [])
       proxy = Spank::Proxy.new(Route.new(command, @container))
       proxy.add_interceptor(:run, @container.resolve(:unit_of_work_interceptor))
+      #interceptors.each { |x| proxy.add_interceptor(:run, x) }
       proxy
     end
   end

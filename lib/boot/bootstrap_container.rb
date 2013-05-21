@@ -45,6 +45,9 @@ class BootstrapContainer
     @container.register(:key) do
       Key.new("database.session")
     end
+    @container.register(:current_user_interceptor) do
+      @container.build(CurrentUserInterceptor)
+    end
     Spank::IOC.bind_to(@container)
   end
 end
