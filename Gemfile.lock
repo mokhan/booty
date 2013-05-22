@@ -57,7 +57,7 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
     simplecov-html (0.7.1)
-    spank (0.0.1)
+    spank (0.0.1369197619)
     unicorn (4.6.2)
       kgio (~> 2.6)
       rack

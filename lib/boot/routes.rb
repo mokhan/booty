@@ -26,7 +26,7 @@ module Booty
     def route_to(command, interceptors = [])
       proxy = Spank::Proxy.new(Route.new(command, @container))
       proxy.add_interceptor(:run, @container.resolve(:unit_of_work_interceptor))
-      #interceptors.each { |x| proxy.add_interceptor(:run, x) }
+      interceptors.each { |x| proxy.add_interceptor(:run, x) }
       proxy
     end
   end
