@@ -3,8 +3,7 @@ echo 'loading bashrc'
 source ~/.bashrc
 
 echo 'loading gemset'
-#cd .
-rvm use ruby-2.0.0-p0@booty --create
+rvm use ruby-2.0.0-p195@booty --create
 
 echo 'run deployment'
 git checkout master
