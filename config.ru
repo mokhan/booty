@@ -1,5 +1,6 @@
 require "rubygems"
 require "rack"
+Bundler.require(:default, (ENV["BOOTY_ENV"]|| "test").to_sym)
 Dir.glob("lib/**/*.rb").each { |x| $:.unshift(File.dirname(x)) }
 ["infrastructure", "orm", "web"].each do |dir|
   Dir["#{File.dirname(__FILE__)}/lib/#{dir}/**/*.rb"].each { |f| require(f) }
