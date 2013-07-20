@@ -14,7 +14,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec'
+  gem 'rspec', '~> 2.13.0'
   gem 'fakes-rspec'
   gem 'watir-webdriver'
   gem 'headless'
