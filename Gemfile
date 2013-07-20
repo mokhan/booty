@@ -7,6 +7,7 @@ gem 'pg'
 gem 'oauth2'
 gem 'bcrypt-ruby'
 gem 'spank'
+gem 'humble'
 
 group :development do
   gem 'mongrel', '>= 1.1.5.pre'

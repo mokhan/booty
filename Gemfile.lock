@@ -18,6 +18,8 @@ GEM
     gem_plugin (0.2.3)
     headless (1.0.1)
     httpauth (0.2.0)
+    humble (0.0.1369313534)
+      sequel
     jwt (0.1.8)
       multi_json (>= 1.5)
     kgio (2.8.0)
@@ -73,6 +75,7 @@ DEPENDENCIES
   bcrypt-ruby
   fakes-rspec
   headless
+  humble
   mongrel (>= 1.1.5.pre)
   oauth2
   pg

@@ -3,6 +3,7 @@ if ENV['CI']
   SimpleCov.start
 end
 require 'fakes-rspec'
+require 'humble'
 require_relative 'integration/orm/test_database_gateway'
 Dir.glob("lib/**/*.rb").each { |x| $:.unshift(File.dirname(x)) }
 Dir.glob("lib/**/*.rb").each { |x| require File.basename(x) }

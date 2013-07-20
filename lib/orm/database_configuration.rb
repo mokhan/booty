@@ -3,7 +3,11 @@ require 'pg'
 
 class DatabaseConfiguration
   def configure(connection)
-    connection.connect(ENV['DATABASE_URL'] || build_connection_string)
+    connection.connect(connection_string)
+  end
+
+  def connection_string
+    ENV['DATABASE_URL'] || build_connection_string
   end
 
   private 
