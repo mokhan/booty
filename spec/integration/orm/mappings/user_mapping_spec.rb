@@ -1,4 +1,4 @@
-require "spec_helper"
+require "integration_helper"
 
 describe User do
   let(:sut) { Repository.new(:users, gateway, DataMapper.new(User)) }
@@ -10,10 +10,6 @@ describe User do
 
   before :each do
     context.add(key, session)
-  end
-
-  after :each do
-    TestDatabaseGateway.delete_all
   end
 
   context "when fetching all" do

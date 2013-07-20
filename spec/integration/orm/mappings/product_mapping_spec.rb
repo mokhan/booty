@@ -1,20 +1,13 @@
-require "spec_helper"
+require "integration_helper"
 
 describe "Product Mapping" do
   context "finding all products" do
     let(:product) { Product.new(:name => 'book') }
 
     before :each do
-      connection_string = DatabaseConfiguration.new.connection_string
-      configuration = Humble::Configuration.new(connection_string)
-      configuration.add(ProductMapping.new)
-      session_factory = configuration.build_session_factory
-      @session = session_factory.create_session
+      @configuration.add(ProductMapping.new)
+      @session = @session_factory.create_session
       @session.save(product)
-    end
-
-    after :each do
-      TestDatabaseGateway.delete_all
     end
 
     let(:results) { @session.find_all(Product) }
