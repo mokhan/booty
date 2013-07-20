@@ -1,6 +1,6 @@
 require "integration_helper"
 
-describe "Product Mapping" do
+describe Product do
   context "finding all products" do
     let(:product) { Product.new(:name => 'book') }
 

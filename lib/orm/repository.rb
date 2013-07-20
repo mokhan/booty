@@ -30,5 +30,4 @@ class Repository
   def run(command)
     @database_gateway.run(command)
   end
-
 end
