@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'sequel'
 
 RSpec.configure do |config|
   config.before :all do

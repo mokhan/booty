@@ -4,11 +4,13 @@ module Booty
       @url = url
       @params = Hash.new()
     end
+
     def append(key, value)
       @params[key] = [] unless @params.has_key?(key)
       @params[key].push(CGI.escape(value))
       self
     end
+
     def build
       result = @url.clone
       result << "?" if @params.keys.any?
@@ -22,6 +24,7 @@ module Booty
       end
       result
     end
+
     def to_s
       build
     end

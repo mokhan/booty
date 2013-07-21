@@ -1,5 +1,6 @@
 require 'yaml'
 require 'pg'
+require 'sequel'
 
 class TestDatabaseGateway
   def self.connection

@@ -11,6 +11,7 @@ module Booty
         result.should == url
       end
     end
+
     context "when building a url" do
       let(:result) { sut.build }
 
@@ -21,6 +22,7 @@ module Booty
           result.should == "#{url}?scope=https%3A%2F%2Fwww.googleapis.com"
         end
       end
+
       context "with different query string params" do
         before :each do
           sut.append(:scope, "https://www.googleapis.com") 
@@ -31,6 +33,7 @@ module Booty
           result.should == "#{url}?scope=https%3A%2F%2Fwww.googleapis.com&redirect_uri=https%3A%2F%2Fmokhan.ca"
         end
       end
+
       context "when multiple values are added for the same key" do
         before :each do
           sut.append(:scope, 'blah')

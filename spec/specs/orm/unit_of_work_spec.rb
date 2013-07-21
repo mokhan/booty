@@ -16,6 +16,7 @@ describe UnitOfWork do
       session.should have_received(:begin_transaction)
     end
   end
+
   context "when ending a unit of work" do
     before { sut.dispose }
 
