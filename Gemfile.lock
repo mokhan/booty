@@ -16,7 +16,7 @@ GEM
     gem_plugin (0.2.3)
     headless (1.0.1)
     httpauth (0.2.0)
-    humble (0.0.1374368890)
+    humble (0.0.1374372435)
       sequel
     jwt (0.1.8)
       multi_json (>= 1.5)

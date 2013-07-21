@@ -6,13 +6,13 @@ class UnitOfWorkFactory
   end
 
   def create
-    @context.contains?(@key) ?  NullUnitOfWork.new : create_unit_of_work
+    @context.contains?(@key) ? NullUnitOfWork.new : create_unit_of_work
   end
 
   private
 
   def create_unit_of_work
-    session = @session_factory.create
+    session = @session_factory.create_session
     @context.add(@key, session)
     UnitOfWork.new(session, @context, @key)
   end

@@ -9,7 +9,8 @@ module Booty
 
     def run
       @registry.register(Assets::AssetCommand.new)
-      @registry.register(route_to(Dashboard::IndexCommand, [@container.resolve(:current_user_interceptor)]))
+      #@registry.register(route_to(Dashboard::IndexCommand, [@container.resolve(:current_user_interceptor)]))
+      @registry.register(route_to(Dashboard::IndexCommand))
       @registry.register(route_to(Products::IndexCommand))
       @registry.register(route_to(Products::NewCommand))
       @registry.register(route_to(Products::CreateCommand))

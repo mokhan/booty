@@ -13,7 +13,7 @@ describe UnitOfWork do
     end
 
     it "should forward the block to the session" do
-      session.should have_received(:run)
+      session.should have_received(:begin_transaction)
     end
   end
   context "when ending a unit of work" do

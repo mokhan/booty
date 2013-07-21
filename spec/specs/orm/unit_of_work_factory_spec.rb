@@ -8,7 +8,7 @@ describe UnitOfWorkFactory do
 
   context "when creating a new unit of work" do
     let(:session) { "session" }
-    before { session_factory.stub(:create).and_return(session) }
+    before { session_factory.stub(:create_session).and_return(session) }
 
     context "when there is no running session" do
       before { application_context.stub(:contains?).with(key).and_return(false) }
