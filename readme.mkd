@@ -1,8 +1,4 @@
-# postgres
+# booty
 
-create a database 
-database: booty
-user: booty
-password: password
+An example rack application.
 
-createuser booty --superuser --pwprompt --
