@@ -6,6 +6,6 @@ class UserMapping < Humble::DatabaseMapping
     map.type User
     map.primary_key(:id, :default => -1)
     map.column :username
-    #map.column :password
+    map.column :password_hash
   end
 end

@@ -2,9 +2,10 @@ require "integration_helper"
 
 describe User do
   context "when fetching all" do
-    let(:user) { User.new(:id => 1, :username => "putty") }
+    let(:user) { User.new(:username => "putty") }
 
     before :each do
+      user.change_password("password")
       @configuration.add(UserMapping.new)
       @session = @session_factory.create_session
       @session.save(user)
@@ -26,6 +27,10 @@ describe User do
 
     it "should map the id properly" do
       results.first.id.should == user.id
+    end
+
+    it "should map the password hash" do
+      results.first.password_matches("password").should be_true
     end
   end
 end
