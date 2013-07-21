@@ -1,3 +1,4 @@
 configuration.yml
 tmp
 coverage
+.vagrant
