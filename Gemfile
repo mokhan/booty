@@ -1,5 +1,5 @@
 source "https://rubygems.org"
-ruby '2.0.0'
+ruby '2.1.0'
 gem 'rake'
 gem 'rack'
 gem 'sequel'
@@ -9,7 +9,7 @@ gem 'bcrypt-ruby'
 gem 'spank'
 gem 'humble'
 
-group :development do
+group :development, :test do
   gem 'mongrel', '>= 1.1.5.pre'
 end
 
@@ -19,10 +19,8 @@ group :test do
   gem 'watir-webdriver'
   gem 'headless'
   gem 'simplecov', :require => false
-  gem 'mongrel', '>= 1.1.5.pre'
 end
 
 group :production do
   gem 'unicorn'
-  gem 'mongrel', '>= 1.1.5.pre'
 end

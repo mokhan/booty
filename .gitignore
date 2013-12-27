@@ -2,3 +2,4 @@ configuration.yml
 tmp
 coverage
 .vagrant
+.bundle
