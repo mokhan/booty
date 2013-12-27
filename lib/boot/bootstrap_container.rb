@@ -31,13 +31,13 @@ class BootstrapContainer
     end
     @container.register(:context) do
       #this should be scoped to each request
-      SimpleContext.new
+      Nasty::SimpleContext.new
     end.as_singleton
     @container.register(:session_factory) do
       session_factory
     end.as_singleton
     @container.register(:key) do
-      Key.new("database.session")
+      Nasty::Key.new("database.session")
     end.as_singleton
     Spank::IOC.bind_to(@container)
   end
