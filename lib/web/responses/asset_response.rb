@@ -12,7 +12,7 @@ module Booty
       headers = {
         "Content-Type" => @content_type,
         "Cache-control" => "public, max-age=31536000",
-        "Expires" => "Wed, 01 Jan 2014 22:00:00 GMT"
+        "Expires" => CGI.rfc1123_date(Time.now + (365 * 24 * 60 * 60))
       }
       [@status, headers, [File.read(File.join(Dir.pwd, @file_path))]]
     end
