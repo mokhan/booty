@@ -1,5 +1,4 @@
 require 'routed_command'
-require 'block_specification'
 
 module Booty
   class RouteRegistry
