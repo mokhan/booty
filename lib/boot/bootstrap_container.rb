@@ -5,6 +5,7 @@ class BootstrapContainer
   def initialize(container = Spank::Container.new)
     @container = container
   end
+
   def run
     configuration = Humble::Configuration.new(DatabaseConfiguration.new.connection_string)
     configuration.add(UserMapping.new)
