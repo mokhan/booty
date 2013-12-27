@@ -1,5 +1,3 @@
-require "log"
-
 module Booty
   class FrontController
     def initialize(command_registry, view_engine)

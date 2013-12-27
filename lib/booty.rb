@@ -15,12 +15,11 @@ end
 
 require 'bootstrap_container'
 require 'routes'
-require 'log'
 
 module Booty
   class Application
     def self.run
-      Log.bind_to(ConsoleLogFactory.new)
+      Nasty::Log.bind_to(Nasty::ConsoleLogFactory.new)
       BootstrapContainer.new.run
       BootstrapRouting.new.run
       logger.debug("starting up http://localhost:9292")
