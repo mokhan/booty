@@ -1,4 +1,3 @@
-require 'expose_binding_behaviour'
 require "erb_template"
 
 module Booty
@@ -18,7 +17,7 @@ module Booty
     end
 
     def binding_for(model)
-      model.extend(ExposeBindingBehaviour)
+      model.extend(Nasty::ExposeBinding)
       model.get_binder
     end
 
