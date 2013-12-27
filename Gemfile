@@ -8,6 +8,7 @@ gem 'oauth2'
 gem 'bcrypt-ruby'
 gem 'spank'
 gem 'humble'
+gem 'nasty'
 
 group :development, :test do
   gem 'mongrel', '>= 1.1.5.pre'

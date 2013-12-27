@@ -28,6 +28,7 @@ GEM
     multi_json (1.8.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
+    nasty (0.0.1388162472)
     oauth2 (0.9.2)
       faraday (~> 0.8)
       httpauth (~> 0.2)
@@ -77,6 +78,7 @@ DEPENDENCIES
   headless
   humble
   mongrel (>= 1.1.5.pre)
+  nasty
   oauth2
   pg
   rack

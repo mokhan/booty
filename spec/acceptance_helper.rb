@@ -35,26 +35,12 @@ def navigate_to(url, &block)
   end
 end
 
-class BackgroundJob
-  def initialize(process)
-    @process = process
-  end
-  def start
-    @pid = fork do
-      exec @process
-    end
-  end
-  def stop
-    Process.kill "TERM", @pid if @pid
-    Process.wait @pid if @pid
-  end
-end
 RSpec.configure do |config|
   jobs = []
-  jobs.push(BackgroundJob.new('bundle exec rackup config.ru -p 9292 -s mongrel'))
+  jobs.push(Nasty::BackgroundJob.new('bundle exec rackup config.ru -p 9292 -s mongrel'))
 
   config.before(:suite) do
-    jobs.each { |job| job.start }
+    jobs.each { |job| job.run }
   end
   config.after(:suite) do
     jobs.each { |job| job.stop }
