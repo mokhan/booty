@@ -1,7 +1,5 @@
-require 'identity_map'
-
 class ReloadFileStrategy
-  def initialize(map = IdentityMap.new)
+  def initialize(map = Nasty::IdentityMap.new)
     @identity_map = map
   end
 
