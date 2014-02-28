@@ -24,11 +24,12 @@ class Database
     configuration = load_configuration_for(environment)
     database = configuration['database']
     username = configuration['username']
+    host = configuration['host']
     #password = configuration['password']
     #command = "CREATE USER #{username} WITH password '#{password}'"
     #sh "psql -c '#{command}'"
-    sh "psql -c 'CREATE DATABASE #{database} WITH OWNER #{username}'"
-    sh "psql -c 'GRANT ALL PRIVILEGES ON DATABASE #{database} TO #{username}'"
+    sh "psql -h #{host} -c 'CREATE DATABASE #{database} WITH OWNER #{username}'"
+    sh "psql -h #{host} -c 'GRANT ALL PRIVILEGES ON DATABASE #{database} TO #{username}'"
   end
 
   def migrate(environment)
